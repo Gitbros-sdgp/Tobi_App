@@ -1,0 +1,5 @@
+white: F5F5FA
+
+Shadow:
+FFFFFF
+AAAACC
