@@ -24,129 +24,69 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Stack(
-                alignment: Alignment.center,
+              new Row(
                 children: <Widget>[
-                  new Container(
-                    height: 60.0,
-                    width: 60.0,
-                    decoration: new BoxDecoration(
-                        borderRadius: new BorderRadius.circular(50.0),
-                        color: Color(0xFF18D191)),
-                    child: new Icon(Icons.local_offer, color: Colors.white),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 6.0,
+                      ),
+                      child: new Container(
+                        alignment: Alignment.topLeft,
+                        height: 50.0,
+                        width: 50.0,
+                        child:
+                            new Image.asset('assets/homePage/sideMenuIcon.jpg'),
+                      ),
+                    ),
                   ),
-                  new Container(
-                    margin: new EdgeInsets.only(right: 50.0, top: 50.0),
-                    height: 60.0,
-                    width: 60.0,
-                    decoration: new BoxDecoration(
-                        borderRadius: new BorderRadius.circular(50.0),
-                        color: Color(0xFFFC6A7F)),
-                    child: new Icon(Icons.home, color: Colors.white),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 146.0,
+                        right: 10.0,
+                      ),
+                      child: new Container(
+                        alignment: Alignment.topRight,
+                        height: 50.0,
+                        width: 50.0,
+                        decoration: new BoxDecoration(
+                          borderRadius: new BorderRadius.circular(50.0),
+                          color: Color(0xFFF5F5FA),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color(0xFFAAAACC),
+                              blurRadius: 8,
+                              offset: Offset(6, 4),
+                            ),
+                          ],
+                        ),
+                        child: ClipRRect(
+                          borderRadius: new BorderRadius.circular(50.0),
+                          child: new Image.asset(
+                            'assets/homePage/IMG-20200920-WA0078.jpg',
+                            height: 50.0,
+                            width: 50.0,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                  new Container(
-                    margin: new EdgeInsets.only(left: 30.0, top: 50.0),
-                    height: 60.0,
-                    width: 60.0,
-                    decoration: new BoxDecoration(
-                        borderRadius: new BorderRadius.circular(50.0),
-                        color: Color(0xFFFFCE56)),
-                    child: new Icon(Icons.local_car_wash, color: Colors.white),
-                  ),
-                  new Container(
-                    margin: new EdgeInsets.only(left: 90.0, top: 40.0),
-                    height: 60.0,
-                    width: 60.0,
-                    decoration: new BoxDecoration(
-                        borderRadius: new BorderRadius.circular(50.0),
-                        color: Color(0xFF45E0EC)),
-                    child: new Icon(Icons.place, color: Colors.white),
-                  )
                 ],
               ),
               new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(top: 8.0, bottom: 200.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: new Text(
-                      'Flutter Designs',
+                      "Welcome back, Pathum",
                       style: new TextStyle(fontSize: 30.0),
                     ),
-                  )
-                ],
-              ),
-              new Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20.0, right: 10.0, top: 10.0),
-                      child: new Container(
-                        alignment: Alignment.center,
-                        height: 60.0,
-                        decoration: new BoxDecoration(
-                          color: Color(0xFF18D191),
-                          borderRadius: new BorderRadius.circular(10.0),
-                        ),
-                        child: new Text(
-                          'Sign In With Email',
-                          style: new TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              new Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20.0, right: 5.0, top: 10.0),
-                      child: new Container(
-                        alignment: Alignment.center,
-                        height: 60.0,
-                        decoration: new BoxDecoration(
-                          color: Color(0xFF4364A1),
-                          borderRadius: new BorderRadius.circular(10.0),
-                        ),
-                        child: new Text(
-                          'FaceBook',
-                          style: new TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 10.0, right: 10.0, top: 10.0),
-                      child: new Container(
-                        alignment: Alignment.center,
-                        height: 60.0,
-                        decoration: new BoxDecoration(
-                          color: Color(0xFFDF513B),
-                          borderRadius: new BorderRadius.circular(10.0),
-                        ),
-                        child: new Text(
-                          'Google',
-                          style: new TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
                 ],
-              )
+              ),
             ],
           ),
         ),
