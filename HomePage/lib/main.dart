@@ -24,6 +24,7 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              // The side menu button and the profile pic
               new Row(
                 children: <Widget>[
                   Expanded(
@@ -75,6 +76,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ],
               ),
+              // The welcome title with the users name
               new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -92,6 +94,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ],
               ),
+              // The breed and emotion buttons
               new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -213,6 +216,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 ],
               ),
+              // The noriceboard and social media buttons
               new Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
