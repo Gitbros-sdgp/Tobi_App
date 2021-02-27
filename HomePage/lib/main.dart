@@ -14,7 +14,12 @@ class homePage extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _homePageState createState() => _homePageState();
+}
+
+class _homePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +122,7 @@ class MyHomePage extends StatelessWidget {
                               boxShadow: [
                                 BoxShadow(
                                   color: Color(0xFFAAAACC),
-                                  blurRadius: 10,
+                                  blurRadius: 10.0,
                                   offset: Offset(6, 4),
                                 ),
                               ],
