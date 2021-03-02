@@ -66,7 +66,7 @@ model.add(layers.Conv2D(32, 3, activation="relu"))
 model.add(layers.Conv2D(32, 3, activation="relu"))
 model.add(layers.MaxPooling2D(2))
 model.add(layers.GlobalMaxPooling2D())
-model.add(layers.Dense(10))
+model.add(layers.Dense(120))
 
 model.summary()
 
