@@ -38,6 +38,7 @@ def login():
     try:
         login=auth.sign_in_with_email_and_password(email,password)
         print("Successfully Login..")
+        print(auth.get_account_info(login['idToken']))
     except:
         print("Invalid email or password")
 
