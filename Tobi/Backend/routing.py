@@ -27,7 +27,7 @@ def signUp():
     # Creates the user account
     if request.method == 'GET':
         result = SignUp.createAccount(sign_fName, sign_lName, sign_username, sign_password, sign_email)
-        return jsonify(result)
+        return result
 
     # Sends Error 405 as the frontend is requesting for an Method that doesn't exist
     else:
