@@ -1,6 +1,7 @@
 # Imports
 from flask import Flask, jsonify, request
 from SignUp import SignUp
+from login import login
 
 # Flask App
 app = Flask(__name__)
@@ -35,6 +36,30 @@ def signUp():
             'Error':'Error 405 - Method Not Allowed'
         }
         return data
+
+
+
+@app.route('/login', methods=['GET', 'POST'])
+
+def login():
+    login_username=""
+    login_password=""
+
+    if request.method == 'POST':
+        login_username = request.form.get('__uname')
+        login_password = request.form.get('__password')
+
+
+    if request.method == 'GET':
+        result = login.verifyAccount(login_username,login_password)
+
+        return result
+    else:
+        data = {
+            'Error': 'Error 405 - Method Not Allowed'
+        }
+        return data
+
 
 # Running the flask app
 if __name__ == '__main__':
