@@ -1,10 +1,11 @@
 # Imports
 from flask import Flask, jsonify, request
-from SignUp import SignUp
-from login import login
+from SignUp import SignUp as sig
+from login import login as log
 
 # Flask App
 app = Flask(__name__)
+
 
 # Routes
 
@@ -27,31 +28,28 @@ def signUp():
 
     # Creates the user account
     if request.method == 'GET':
-        result = SignUp.createAccount(sign_fName, sign_lName, sign_username, sign_password, sign_email)
+        result = sig.createAccount(sign_fName, sign_lName, sign_username, sign_password, sign_email)
         return jsonify(result)
 
     # Sends Error 405 as the frontend is requesting for an Method that doesn't exist
     else:
         data = {
-            'Error':'Error 405 - Method Not Allowed'
+            'Error': 'Error 405 - Method Not Allowed'
         }
         return jsonify(data)
 
 
-
 @app.route('/login', methods=['GET', 'POST'])
-
 def login():
-    login_username=""
-    login_password=""
+    login_username = ''
+    login_password = ''
 
     if request.method == 'POST':
         login_username = request.form.get('__uname')
         login_password = request.form.get('__password')
 
-
     if request.method == 'GET':
-        result = login.verifyAccount(login_username,login_password)
+        result = log.verifyAccount(login_username, login_password)
 
         return jsonify(result)
     else:
@@ -63,4 +61,4 @@ def login():
 
 # Running the flask app
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug=True)
