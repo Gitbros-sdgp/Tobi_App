@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'Option.dart';
+import 'Home.dart';
 import 'package:flutter/material.dart';
 import 'SignUp.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +18,8 @@ class LoginPage extends StatefulWidget {
 Future<Welcome> verifyUser(String username, String password) async {
   final String apiUrl = 'https://testing-l.herokuapp.com/login';
 
-  await http.post(apiUrl, body: {"username": username, "password": password});
+  await http.post(apiUrl, body: {"__uname": username, "__password": password});
+  return null;
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -142,8 +143,8 @@ class _LoginPageState extends State<LoginPage> {
 
           if (_username == true) {
             if (_password == true) {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => OptionPage()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => homePage()));
             }
           }
         });
@@ -306,7 +307,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _usernameField("Email id"),
+        _usernameField("Username"),
         _passwordField("Password", isPassword: true),
       ],
     );
