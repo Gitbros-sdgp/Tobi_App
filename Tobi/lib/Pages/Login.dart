@@ -15,11 +15,18 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-Future<Welcome> verifyUser(String username, String password) async {
-  final String apiUrl = 'https://testing-l.herokuapp.com/login';
+Future<http.Response> verifyUser(String username, String password) {
+  // final String apiUrl = 'https://testing-l.herokuapp.com/login';
 
-  await http.post(apiUrl, body: {"__uname": username, "__password": password});
-  return null;
+  // await http.post(apiUrl, body: {"__uname": username, "__password": password});
+  return http.post(
+    Uri.https('testing-l.herokuapp.com', 'login'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(
+        <String, String>{'__uname': username, '__password': password}),
+  );
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -130,12 +137,12 @@ class _LoginPageState extends State<LoginPage> {
         final String username = usernameController.text;
         final String password = passwordController.text;
 
-        await verifyUser(username, password);
+        verifyUser(username, password);
 
         final response =
             await http.get('https://testing-l.herokuapp.com/login');
 
-        final decoded = json.decode(response.body) as Map<String, dynamic>;
+        final decoded = json.decode(response.body) as Map<String, bool>;
 
         setState(() {
           bool _username = decoded['username'];
