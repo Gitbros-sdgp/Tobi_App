@@ -49,7 +49,7 @@ def login():
         login_password = request.form.get('__password')
 
     if request.method == 'GET':
-        result = log.verifyAccount("Pathum312", "abcd")
+        result = log.verifyAccount(login_username, login_password)
 
         return jsonify(result)
     else:
