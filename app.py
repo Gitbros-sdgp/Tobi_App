@@ -41,8 +41,8 @@ def signUp():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    login_username = ''
-    login_password = ''
+    # login_username = ''
+    # login_password = ''
 
     if request.method == 'POST':
         login_username = request.form.get('__uname')
