@@ -45,8 +45,8 @@ def login():
     login_password = ''
 
     if request.method == 'POST':
-        login_username = request.form.get('__uname')
-        login_password = request.form.get('__password')
+        login_username = request.get_json('__uname')
+        login_password = request.get_json('__password')
         return login_username, login_password
 
     if request.method == 'GET':
