@@ -1,4 +1,5 @@
 # Imports
+import json
 from flask import Flask, jsonify, request
 from SignUp import SignUp as sig
 from login import login as log
@@ -41,12 +42,13 @@ def signUp():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    login_username = ''
-    login_password = ''
+    global login_username, login_password
 
     if request.method == 'POST':
-        login_username = request.get_json('__uname')
-        login_password = request.get_json('__password')
+        request_data = request.data
+        request_data = json.loads(request_data.decode('utf-8'))
+        login_username = request_data['__uname']
+        login_password = request_data['__password']
         return login_username, login_password
 
     if request.method == 'GET':
