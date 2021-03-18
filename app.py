@@ -47,12 +47,10 @@ def login():
     if request.method == 'POST':
         login_username = request.get_json('__uname')
         login_password = request.get_json('__password')
-        login_username = 'Pathum312'
-        login_password = 'abcd'
         return login_username, login_password
 
     if request.method == 'GET':
-        result = log.verifyAccount(login_username, login_password)
+        result = log.verifyAccount('Pathum312', 'abcd')
 
         return jsonify(result)
     else:
