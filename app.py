@@ -66,7 +66,7 @@ def login():
         data = {
             'Error': 'Error 405 - Method Not Allowed'
         }
-        return jsonify(data)
+        return jsonify(response)
 
 
 # Running the flask app
