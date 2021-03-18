@@ -42,7 +42,9 @@ def signUp():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    global login_username, login_password
+
+    login_username = ''
+    login_password = ''
 
     if request.method == 'POST':
         request_data = request.data
