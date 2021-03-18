@@ -51,12 +51,13 @@ def login():
         request_data = json.loads(request_data.decode('utf-8'))
         login_username = request_data['__uname']
         login_password = request_data['__password']
-        return login_username, login_password
+        response = log.verifyAccount(login_username, login_password)
+        return jsonify(response)
 
-    if request.method == 'GET':
-        result = log.verifyAccount(login_username, login_password)
-
-        return jsonify(result)
+    # if request.method == 'GET':
+    #     result = log.verifyAccount(login_username, login_password)
+    #
+    #     return jsonify(result)
     else:
         data = {
             'Error': 'Error 405 - Method Not Allowed'
