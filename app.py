@@ -4,7 +4,8 @@ from flask import Flask, jsonify, request
 from SignUp import SignUp as sig
 from login import login as log
 
-response = ''
+login_username = ''
+login_password = ''
 
 # Flask App
 app = Flask(__name__)
@@ -45,28 +46,27 @@ def signUp():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
-    login_username = ''
-    login_password = ''
-    global response
+
+    global login_username, login_password
 
     if request.method == 'POST':
         request_data = request.data
         request_data = json.loads(request_data.decode('utf-8'))
         login_username = request_data['__uname']
         login_password = request_data['__password']
-        response = log.verifyAccount(login_username, login_password)
+        # response = log.verifyAccount(login_username, login_password)
         return " "
         # return login_username, login_password
 
-    # elif request.method == 'GET':
-    #     result = log.verifyAccount(login_username, login_password)
-    #
-    #     return jsonify(result)
+    elif request.method == 'GET':
+        result = log.verifyAccount(login_username, login_password)
+
+        return jsonify(result)
     else:
         data = {
             'Error': 'Error 405 - Method Not Allowed'
         }
-        return jsonify(response)
+        return jsonify(data)
 
 
 # Running the flask app
