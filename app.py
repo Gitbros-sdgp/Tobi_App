@@ -50,7 +50,7 @@ def login():
         return login_username, login_password
 
     if request.method == 'GET':
-        result = log.verifyAccount('Pathum312', 'abcd')
+        result = log.verifyAccount(login_username, login_password)
 
         return jsonify(result)
     else:
