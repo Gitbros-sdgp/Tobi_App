@@ -3,62 +3,68 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'Option.dart';
 
+Widget timing(BuildContext context) {
+  Future.delayed(Duration(seconds: 1), () {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => OptionPage()));
+  });
+  return Scaffold();
+}
+
 class WelcomePage extends StatelessWidget {
-  //final WelComeText welComeText;
-  //yApp(this.welComeText);
-
-  // Widget countdown() {
-  //   return Timer(duration, callback)
-  // }
-
-  Widget timing(hello) {
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.push(
-          hello, MaterialPageRoute(builder: (context) => OptionPage()));
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       //title: 'Welcom',
       theme: ThemeData(primarySwatch: Colors.yellow),
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          backgroundColor: Color(0xffFDD610),
-          body: Column(children: <Widget>[
-            timing(context),
-            Row(
-              //ROW 1
+      home: MyWelcomePage(),
+    );
+  }
+}
+
+class MyWelcomePage extends StatefulWidget {
+  @override
+  _welcomePageState createState() => _welcomePageState();
+}
+
+class _welcomePageState extends State<MyWelcomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Color(0xffFDD610),
+        body: Column(children: <Widget>[
+          Row(
+            //ROW 1
+            children: [
+              Container(
+                //color: Colors.white,
+
+                child: Text(
+                  "T",
+                  style: GoogleFonts.lato(fontSize: 150),
+                ),
+
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+                margin: EdgeInsets.only(left: 120, top: 100.0, bottom: 0.0),
+                padding: EdgeInsets.all(40.0),
+              ),
+            ],
+          ),
+          Row(
+              //         //ROW 2
               children: [
                 Container(
-                  //color: Colors.white,
-
                   child: Text(
-                    "T",
-                    style: GoogleFonts.lato(fontSize: 150),
+                    "Welcome",
+                    style: GoogleFonts.lato(fontSize: 40),
                   ),
-
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
-                  margin: EdgeInsets.only(left: 120, top: 100.0, bottom: 0.0),
-                  padding: EdgeInsets.all(40.0),
+                  margin: EdgeInsets.only(left: 120),
+                  padding: EdgeInsets.only(top: 0),
                 ),
-              ],
-            ),
-            Row(
-                //         //ROW 2
-                children: [
-                  Container(
-                    child: Text(
-                      "Welcome",
-                      style: GoogleFonts.lato(fontSize: 40),
-                    ),
-                    margin: EdgeInsets.only(left: 120),
-                    padding: EdgeInsets.only(top: 0),
-                  ),
-                ]),
-          ])),
-    );
+              ]),
+          timing(context),
+        ]));
   }
 }

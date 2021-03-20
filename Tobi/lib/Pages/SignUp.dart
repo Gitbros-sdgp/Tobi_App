@@ -40,16 +40,17 @@ class _SignupPageState extends State<SignupPage> {
         children: <Widget>[
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          // SizedBox(
+          //   height: 5,
+          // ),
           TextField(
               obscureText: isPassword,
               decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
+                  // border: InputBorder.none,
+                  // fillColor: Color(0xfff3f3f4),
+                  fillColor: Colors.transparent,
                   filled: true))
         ],
       ),
@@ -115,24 +116,29 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   Widget _createsignupButtonGoogle() {
-    return new Container(
+    return Container(
+      // color: Colors.orangeAccent,
       margin: EdgeInsets.fromLTRB(30.0, 5.0, 30.0, 5.0),
-      child: new RaisedButton(
-          padding: EdgeInsets.only(top: 3.0, bottom: 3.0, left: 6.0),
-          color: Colors.white,
-          onPressed: () {},
-          child: new Row(
+      child: RaisedButton(
+          // color: Colors.orangeAccent,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+          padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+          color: Color.fromARGB(255, 255, 213, 0),
+          onPressed: () {}, // action event fucntion
+          child: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              new Image.asset(
-                'assets/google.png',
-                height: 48.0,
+              Image.asset(
+                'assets/SignUpPage/googleIcon.png',
+                height: 40.0,
               ),
-              new Container(
+              Container(
                   padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: new Text(
+                  child: Text(
                     "Sign in with Google",
                     style: TextStyle(
+                      fontSize: 16,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
@@ -142,39 +148,40 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  Widget _title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-          text: 'T',
-          style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.headline4,
-            fontSize: 32,
-            fontWeight: FontWeight.w700,
-            color: Colors.black,
-          ),
-          children: [
-            TextSpan(
-              text: 'o',
-              style: TextStyle(color: Colors.black, fontSize: 32),
-            ),
-            TextSpan(
-              text: 'b',
-              style: TextStyle(
-                  color: Colors.black, fontSize: 32), //meka style karanna akuru
-            ),
-            TextSpan(
-              text: 'i',
-              style: TextStyle(color: Colors.black, fontSize: 32),
-            ),
-          ]),
-    );
-  }
+  // Widget _title() {
+  //   //coment karamnna
+  //   return RichText(
+  //     textAlign: TextAlign.center,
+  //     text: TextSpan(
+  //         text: 'T',
+  //         style: GoogleFonts.portLligatSans(
+  //           textStyle: Theme.of(context).textTheme.headline4,
+  //           fontSize: 32,
+  //           fontWeight: FontWeight.w700,
+  //           color: Colors.black,
+  //         ),
+  //         children: [
+  //           TextSpan(
+  //             text: 'o',
+  //             style: TextStyle(color: Colors.black, fontSize: 32),
+  //           ),
+  //           TextSpan(
+  //             text: 'b',
+  //             style: TextStyle(
+  //                 color: Colors.black, fontSize: 32), //meka style karanna akuru
+  //           ),
+  //           TextSpan(
+  //             text: 'i',
+  //             style: TextStyle(color: Colors.black, fontSize: 32),
+  //           ),
+  //         ]),
+  //   );
+  // }
 
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("User Name"),
+        _entryField("User Name"), //default false is password variabe
         _entryField("Email"),
         _entryField("Password", isPassword: true),
         _entryField("Confirm Password", isPassword: true),
@@ -184,21 +191,24 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    final height =
+        MediaQuery.of(context).size.height; // app hight app widhth gannawa
+    // final width = MediaQuery.of(context).size.width;
     return Scaffold(
         body: Container(
-      height: height,
+      height: height, //scaffold aadesha karanawa ressponsive design
       child: Stack(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                  Color.fromARGB(255, 255, 213, 0),
-                  Color.fromARGB(255, 210, 175, 83)
-                ])),
+                // gradient: LinearGradient(
+                //     begin: Alignment.topCenter,
+                //     end: Alignment.bottomCenter,
+                //     colors: [
+                //   Color.fromARGB(255, 255, 213, 0),
+                //   Color.fromARGB(255, 255, 175, 83)
+                // ])
+                ),
             padding: EdgeInsets.symmetric(horizontal: 17),
             child: SingleChildScrollView(
               child: Column(
@@ -209,16 +219,19 @@ class _SignupPageState extends State<SignupPage> {
                   // _title(),
                   //SizedBox(height: 50),
                   _emailPasswordWidget(),
-                  SizedBox(height: 20),
+                  SizedBox(height: height * .03),
                   _submitButton(),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    alignment: Alignment.centerRight,
-                    child: Text('Forgot Password ?',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500)),
-                  ),
+                  // Container(
+                  //   padding: EdgeInsets.symmetric(vertical: 10),
+                  //   alignment: Alignment.centerRight,
+                  //   child: Text('Forgot Password ?',
+                  //       style: TextStyle(
+                  //           fontSize: 14, fontWeight: FontWeight.w500)),
+                  // ),
+                  SizedBox(height: height * .02),
                   _divider(),
+                  SizedBox(height: height * .015),
+
                   _createsignupButtonGoogle(),
                   SizedBox(height: height * .055),
                   // _createAccountLabel(),
