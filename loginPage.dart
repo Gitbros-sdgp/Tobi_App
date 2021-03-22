@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _divider() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(vertical: 9),
       child: Row(
         children: <Widget>[
           SizedBox(
