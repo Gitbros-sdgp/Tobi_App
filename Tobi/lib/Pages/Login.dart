@@ -145,13 +145,16 @@ class _LoginPageState extends State<LoginPage> {
         final decoded = json.decode(response.body) as Map<String, dynamic>;
 
         setState(() {
-          bool _username = decoded['username'];
-          bool _password = decoded['password'];
+          String _username = decoded['username'];
+          String _password = decoded['password'];
+          String _fName = decoded['fName'];
 
-          if (_username == true) {
-            if (_password == true) {
+          if (_username == username) {
+            if (_password == password) {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => homePage()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => MyHomePage(fName: _fName)));
             }
           }
         });

@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
+import 'Breed_PageOne.dart';
 
-class homePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Home Page',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Actor'),
-      home: MyHomePage(),
-    );
-  }
-}
+// class homePage extends StatelessWidget {
+//   final String fName;
+//   homePage({Key key, @required this.fName}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Home Page',
+//       debugShowCheckedModeBanner: false,
+//       theme: ThemeData(fontFamily: 'Actor'),
+//       home: MyHomePage(fName),
+//     );
+//   }
+// }
 
 class MyHomePage extends StatefulWidget {
+  String fName;
+  MyHomePage({Key key, @required this.fName}) : super(key: key);
+
   @override
-  _homePageState createState() => _homePageState();
+  _homePageState createState() => _homePageState(fName);
 }
 
 class _homePageState extends State<MyHomePage> {
+  String fName;
+  _homePageState(this.fName);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,8 +101,8 @@ class _homePageState extends State<MyHomePage> {
                       top: 43.0,
                     ),
                     child: new Text(
-                      "Welcome back, Pathum",
-                      style: new TextStyle(fontSize: 30.0),
+                      "Welcome back, " + fName,
+                      style: new TextStyle(fontSize: 30.0, fontFamily: 'Actor'),
                     ),
                   ),
                 ],
@@ -107,55 +117,63 @@ class _homePageState extends State<MyHomePage> {
                         left: 21.0,
                         bottom: 21.0,
                       ),
-                      child: new Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          new Container(
-                            alignment: Alignment.center,
-                            height: 160.0,
-                            width: 152.0,
-                            decoration: new BoxDecoration(
-                              color: Color(0xFFF5F5FA),
-                              borderRadius: BorderRadius.circular(20.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color(0xFFAAAACC),
-                                  blurRadius: 10.0,
-                                  offset: Offset(6, 4),
+                      child: InkWell(
+                        child: new Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            new Container(
+                              alignment: Alignment.center,
+                              height: 160.0,
+                              width: 152.0,
+                              decoration: new BoxDecoration(
+                                color: Color(0xFFF5F5FA),
+                                borderRadius: BorderRadius.circular(20.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xFFAAAACC),
+                                    blurRadius: 10.0,
+                                    offset: Offset(6, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 8.0,
+                                  bottom: 30.0,
                                 ),
-                              ],
+                                child: new Image.asset(
+                                  'assets/homePage/breedIcon.jpg',
+                                  height: 95.0,
+                                  width: 98.0,
+                                ),
+                              ),
                             ),
-                            child: Padding(
+                            Padding(
                               padding: const EdgeInsets.only(
                                 left: 8.0,
-                                bottom: 30.0,
+                                top: 100.0,
                               ),
-                              child: new Image.asset(
-                                'assets/homePage/breedIcon.jpg',
-                                height: 95.0,
-                                width: 98.0,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 8.0,
-                              top: 100.0,
-                            ),
-                            child: new Container(
-                              alignment: Alignment.center,
-                              height: 24.0,
-                              width: 60.0,
-                              child: new Text(
-                                'Breed',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontFamily: 'Actor',
+                              child: new Container(
+                                alignment: Alignment.center,
+                                height: 24.0,
+                                width: 60.0,
+                                child: new Text(
+                                  'Breed',
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontFamily: 'Actor',
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
+                        onTap: () async {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyBreedPageOne()));
+                        },
                       ),
                     ),
                   ),
