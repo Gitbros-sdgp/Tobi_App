@@ -25,12 +25,14 @@ class AccountDatabase:
         for i in user_data:
             users_username = dbConeection.get('test-3f1bf-default-rtdb/User-Credentials/' + i + '/username', '')
             users_password = dbConeection.get('test-3f1bf-default-rtdb/User-Credentials/' + i + '/password', '')
+            users_fName = dbConeection.get('test-3f1bf-default-rtdb/User-Credentials/' + i+'/fName')
 
             if users_username == user:
                 if users_password == password:
                     data = {
-                        'username':True,
-                        'password':True
+                        'fName':users_fName,
+                        'username':users_username,
+                        'password':users_password
                     }
                     return data
 
