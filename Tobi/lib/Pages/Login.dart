@@ -5,32 +5,30 @@ import 'SignUp.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'User_Model.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-Future<http.Response> verifyUser(String username, String password) {
-  // final String apiUrl = 'https://testing-l.herokuapp.com/login';
+// Future<http.Response> verifyUser(String username, String password) {
+//   // final String apiUrl = 'https://testing-l.herokuapp.com/login';
 
-  // return http.post(apiUrl, body: {"__uname": username, "__password": password});
-  return http.post(
-    Uri.https('testing-l.herokuapp.com', 'login'),
-    headers: <String, String>{
-      'Content-Type': 'application/json; charset=UTF-8',
-    },
-    body: jsonEncode(
-        <String, String>{'__uname': username, '__password': password}),
-  );
-}
+//   // return http.post(apiUrl, body: {"__uname": username, "__password": password});
+//   return http.post(
+//     Uri.https('testing-l.herokuapp.com', 'login'),
+//     headers: <String, String>{
+//       'Content-Type': 'application/json; charset=UTF-8',
+//     },
+//     body: jsonEncode(
+//         <String, String>{'__uname': username, '__password': password}),
+//   );
+// }
 
 class _LoginPageState extends State<LoginPage> {
-  Welcome user;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String _email, _password;
 
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -69,13 +67,20 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             height: 10,
           ),
-          TextField(
-              controller: passwordController,
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
+          TextFormField(
+            obscureText: isPassword,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: Color(0xfff3f3f4),
+              filled: true,
+            ),
+            validator: (input) {
+              if (input.length < 6) {
+                return 'Password has to be longer than 6 characters!';
+              }
+            },
+            onSaved: (input) => _password = input,
+          ),
         ],
       ),
     );
@@ -94,13 +99,20 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             height: 10,
           ),
-          TextField(
-              controller: usernameController,
-              obscureText: isPassword,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  fillColor: Color(0xfff3f3f4),
-                  filled: true))
+          TextFormField(
+            obscureText: isPassword,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              fillColor: Color(0xfff3f3f4),
+              filled: true,
+            ),
+            validator: (input) {
+              if (input.isEmpty) {
+                return 'Please enter your email!';
+              }
+            },
+            onSaved: (input) => _email = input,
+          ),
         ],
       ),
     );
@@ -134,30 +146,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
       onTap: () async {
-        final String username = usernameController.text;
-        final String password = passwordController.text;
-
-        await verifyUser(username, password);
-
-        final response =
-            await http.get('https://testing-l.herokuapp.com/login');
-
-        final decoded = json.decode(response.body) as Map<String, dynamic>;
-
-        setState(() {
-          String _username = decoded['username'];
-          String _password = decoded['password'];
-          String _fName = decoded['fName'];
-
-          if (_username == username) {
-            if (_password == password) {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MyHomePage(fName: _fName)));
-            }
-          }
-        });
+        signIn();
       },
     );
   }
@@ -315,11 +304,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _usernameField("Username"),
-        _passwordField("Password", isPassword: true),
-      ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: <Widget>[
+          _usernameField("Email"),
+          _passwordField("Password", isPassword: true),
+        ],
+      ),
     );
   }
 
@@ -327,45 +319,56 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Container(
-      height: height,
-      child: Stack(
-        children: <Widget>[
-          // Positioned(
-          //     top: -height * .15,
-          //     right: -MediaQuery.of(context).size.width * .4,
-          //     child: BezierContainer()),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: height * .1),
-                  _title(),
-                  SizedBox(height: 50),
-                  _emailPasswordWidget(),
-                  SizedBox(height: 20),
-                  _submitButton(),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    alignment: Alignment.centerRight,
-                    child: Text('Forgot Password ?',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500)),
-                  ),
-                  _divider(),
-                  _facebookButton(),
-                  SizedBox(height: height * .055),
-                  _createAccountLabel(),
-                ],
+      body: Container(
+        height: height,
+        child: Stack(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(height: height * .1),
+                    _title(),
+                    SizedBox(height: 50),
+                    _emailPasswordWidget(),
+                    SizedBox(height: 20),
+                    _submitButton(),
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      alignment: Alignment.centerRight,
+                      child: Text('Forgot Password ?',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w500)),
+                    ),
+                    _divider(),
+                    _facebookButton(),
+                    SizedBox(height: height * .055),
+                    _createAccountLabel(),
+                  ],
+                ),
               ),
             ),
-          ),
-          Positioned(top: 40, left: 0, child: _backButton()),
-        ],
+            Positioned(top: 40, left: 0, child: _backButton()),
+          ],
+        ),
       ),
-    ));
+    );
+  }
+
+  void signIn() async {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      try {
+        FirebaseUser user = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: _email, password: _password);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => MyHomePage(user: user)));
+      } catch (e) {
+        print(e.message);
+      }
+    }
   }
 }

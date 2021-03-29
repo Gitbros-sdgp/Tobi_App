@@ -1,35 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'Breed_PageOne.dart';
-
-// class homePage extends StatelessWidget {
-//   final String fName;
-//   homePage({Key key, @required this.fName}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Home Page',
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(fontFamily: 'Actor'),
-//       home: MyHomePage(fName),
-//     );
-//   }
-// }
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyHomePage extends StatefulWidget {
-  String fName;
-  MyHomePage({Key key, @required this.fName}) : super(key: key);
+  FirebaseUser user;
+  MyHomePage({Key key, this.user}) : super(key: key);
 
   @override
-  _homePageState createState() => _homePageState(fName);
+  _homePageState createState() => _homePageState(user);
 }
 
 class _homePageState extends State<MyHomePage> {
-  String fName;
-  _homePageState(this.fName);
+  FirebaseUser user;
+  _homePageState(this.user);
 
   @override
   Widget build(BuildContext context) {
+    String _uid;
+    String _email;
+
+    // CollectionReference users = Firestore.instance.collection('UserData');
+
+    _uid = '${widget.user.uid}';
+    _email = '${widget.user.email}';
+
     return Scaffold(
       body: Center(
         child: Container(
@@ -101,7 +96,7 @@ class _homePageState extends State<MyHomePage> {
                       top: 43.0,
                     ),
                     child: new Text(
-                      "Welcome back, " + fName,
+                      "Welcome back, " + _uid,
                       style: new TextStyle(fontSize: 30.0, fontFamily: 'Actor'),
                     ),
                   ),
