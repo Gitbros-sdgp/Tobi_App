@@ -168,3 +168,33 @@ sort: (a, b) => b.key.compareTo(a.key),
       'senderName': googleSignIn.currentUser.displayName,
       'senderPhotoUrl': googleSignIn.currentUser.photoUrl,
     });
+analytics.logEvent(name: 'send_message');
+  }
+
+  Future<Null> _ensureLoggedIn() async {
+    GoogleSignInAccount signedInUser = googleSignIn.currentUser;
+    if (signedInUser == null)
+      signedInUser = await googleSignIn.signInSilently();
+    if (signedInUser == null) {
+      await googleSignIn.signIn();
+      analytics.logLogin();
+    }
+
+    currentUserEmail = googleSignIn.currentUser.email;
+
+    if (await auth.currentUser() == null) {
+      GoogleSignInAuthentication credentials =
+          await googleSignIn.currentUser.authentication;
+      await auth.signInWithGoogle(
+          idToken: credentials.idToken, accessToken: credentials.accessToken);
+    }
+  }
+
+  Future _signOut() async {
+    await auth.signOut();
+    googleSignIn.signOut();
+    Scaffold
+        .of(_scaffoldContext)
+        .showSnackBar(new SnackBar(content: new Text('User logged out')));
+  }
+}
