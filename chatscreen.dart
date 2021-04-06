@@ -111,3 +111,25 @@ sort: (a, b) => b.key.compareTo(a.key),
                       Icons.photo_camera,
                       color: Theme.of(context).accentColor,
                     ),
+ onPressed: () async {
+                      await _ensureLoggedIn();
+                      File imageFile = await ImagePicker.pickImage();
+                      int timestamp = new DateTime.now().millisecondsSinceEpoch;
+                      StorageReference storageReference = FirebaseStorage
+                          .instance
+                          .ref()
+                          .child("img_" + timestamp.toString() + ".jpg");
+                      StorageUploadTask uploadTask =
+                          storageReference.put(imageFile);
+                      Uri downloadUrl = (await uploadTask.future).downloadUrl;
+                      _sendMessage(
+                          messageText: null, imageUrl: downloadUrl.toString());
+                    }),
+              ),
+              new Flexible(
+                child: new TextField(
+                  controller: _textEditingController,
+                  onChanged: (String messageText) {
+                    setState(() {
+                      _isComposingMessage = messageText.length > 0;
+                    });
