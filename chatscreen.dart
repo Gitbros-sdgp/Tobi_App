@@ -149,3 +149,22 @@ sort: (a, b) => b.key.compareTo(a.key),
           ),
         ));
   }
+ Future<Null> _textMessageSubmitted(String text) async {
+    _textEditingController.clear();
+
+    setState(() {
+      _isComposingMessage = false;
+    });
+
+    await _ensureLoggedIn();
+    _sendMessage(messageText: text, imageUrl: null);
+  }
+
+  void _sendMessage({String messageText, String imageUrl}) {
+    reference.push().set({
+      'text': messageText,
+      'email': googleSignIn.currentUser.email,
+      'imageUrl': imageUrl,
+      'senderName': googleSignIn.currentUser.displayName,
+      'senderPhotoUrl': googleSignIn.currentUser.photoUrl,
+    });
