@@ -28,3 +28,19 @@ class ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
+ title: new Text("Flutter Chat App"),
+          elevation:
+              Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
+          actions: <Widget>[
+            new IconButton(
+                icon: new Icon(Icons.exit_to_app), onPressed: _signOut)
+          ],
+        ),
+        body: new Container(
+          child: new Column(
+            children: <Widget>[
+              new Flexible(
+                child: new FirebaseAnimatedList(
+                  query: reference,
+                  padding: const EdgeInsets.all(8.0),
+                  reverse: true,
