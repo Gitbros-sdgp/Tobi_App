@@ -52,3 +52,18 @@ sort: (a, b) => b.key.compareTo(a.key),
                       messageSnapshot: messageSnapshot,
                       animation: animation,
                     );
+ },
+                ),
+              ),
+              new Divider(height: 1.0),
+              new Container(
+                decoration:
+                    new BoxDecoration(color: Theme.of(context).cardColor),
+                child: _buildTextComposer(),
+              ),
+              new Builder(builder: (BuildContext context) {
+                _scaffoldContext = context;
+                return new Container(width: 0.0, height: 0.0);
+              })
+            ],
+          ),
