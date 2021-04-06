@@ -66,4 +66,21 @@ sort: (a, b) => b.key.compareTo(a.key),
                 return new Container(width: 0.0, height: 0.0);
               })
             ],
-          ),
+          ), decoration: Theme.of(context).platform == TargetPlatform.iOS
+              ? new BoxDecoration(
+                  border: new Border(
+                      top: new BorderSide(
+                  color: Colors.grey[200],
+                )))
+              : null,
+        ));
+  }
+
+  CupertinoButton getIOSSendButton() {
+    return new CupertinoButton(
+      child: new Text("Send"),
+      onPressed: _isComposingMessage
+          ? () => _textMessageSubmitted(_textEditingController.text)
+          : null,
+    );
+  }
