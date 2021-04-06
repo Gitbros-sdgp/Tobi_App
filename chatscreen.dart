@@ -18,3 +18,13 @@ class ChatScreen extends StatefulWidget {
     return new ChatScreenState();
   }
 }
+class ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _textEditingController =
+      new TextEditingController();
+  bool _isComposingMessage = false;
+  final reference = FirebaseDatabase.instance.reference().child('messages');
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        appBar: new AppBar(
