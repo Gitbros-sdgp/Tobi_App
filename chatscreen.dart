@@ -133,3 +133,19 @@ sort: (a, b) => b.key.compareTo(a.key),
                     setState(() {
                       _isComposingMessage = messageText.length > 0;
                     });
+ },
+                  onSubmitted: _textMessageSubmitted,
+                  decoration:
+                      new InputDecoration.collapsed(hintText: "Send a message"),
+                ),
+              ),
+              new Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Theme.of(context).platform == TargetPlatform.iOS
+                    ? getIOSSendButton()
+                    : getDefaultSendButton(),
+              ),
+            ],
+          ),
+        ));
+  }
