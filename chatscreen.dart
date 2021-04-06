@@ -44,3 +44,11 @@ class ChatScreenState extends State<ChatScreen> {
                   query: reference,
                   padding: const EdgeInsets.all(8.0),
                   reverse: true,
+sort: (a, b) => b.key.compareTo(a.key),
+                  //comparing timestamp of messages to check which one would appear first
+                  itemBuilder: (_, DataSnapshot messageSnapshot,
+                      Animation<double> animation) {
+                    return new ChatMessageListItem(
+                      messageSnapshot: messageSnapshot,
+                      animation: animation,
+                    );
