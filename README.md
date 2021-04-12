@@ -1,6 +1,6 @@
 # Tobi
 
-A new Flutter project.
+A new Flutter project  of Dog breed Classification
 
 ## Getting Started
 
