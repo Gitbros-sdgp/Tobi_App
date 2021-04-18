@@ -76,7 +76,7 @@ def breed():
 
 
     if request.method == 'GET':
-        result = breed.verifyBreed(path='download.jpg', size=224)
+        result = breed.verifyBreed(path='https://firebasestorage.googleapis.com/v0/b/test-3f1bf.appspot.com/o/download.jpg?alt=media&token=03b09db3-29f3-40eb-be21-6b276b976708', size=224)
 
         return jsonify(result)
 
