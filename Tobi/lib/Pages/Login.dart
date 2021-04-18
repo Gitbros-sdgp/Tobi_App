@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'User_Model.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -362,8 +363,11 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       try {
-        FirebaseUser user = await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: _email, password: _password);
+        await Firebase.initializeApp();
+        final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+        User user = (await _firebaseAuth.signInWithEmailAndPassword(
+                email: _email, password: _password))
+            .user;
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => MyHomePage(user: user)));
       } catch (e) {

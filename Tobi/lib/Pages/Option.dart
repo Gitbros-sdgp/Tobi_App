@@ -14,15 +14,41 @@ class OptionPage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<OptionPage> {
+  bool selected = false;
+
+  double _updateState() {
+    setState(() {
+      selected = !selected;
+    });
+  }
+
   //rendr grphcs
   Widget _submitButton() {
     // submit button
     return InkWell(
       onTap: () {
+        _updateState();
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+          context,
+          PageRouteBuilder(
+              transitionDuration: Duration(seconds: 2),
+              transitionsBuilder: (context, animation, animationTime, child) {
+                animation = CurvedAnimation(
+                    parent: animation, curve: Curves.elasticInOut);
+                return ScaleTransition(
+                  alignment: Alignment.centerRight,
+                  scale: animation,
+                  child: child,
+                );
+              },
+              pageBuilder: (context, animation, animationTime) {
+                return LoginPage();
+              }),
+        );
       },
-      child: Container(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 10),
+        curve: Curves.bounceInOut,
         width: MediaQuery.of(context).size.width,
         padding: EdgeInsets.symmetric(vertical: 13),
         alignment: Alignment.center,
@@ -35,7 +61,7 @@ class _WelcomePageState extends State<OptionPage> {
                   blurRadius: 8,
                   spreadRadius: 2)
             ],
-            color: Colors.white),
+            color: selected ? Colors.black : Colors.white),
         child: Text(
           'Login',
           style: TextStyle(fontSize: 20, color: Color(0xfff7892b)),
@@ -67,34 +93,6 @@ class _WelcomePageState extends State<OptionPage> {
       ),
     );
   }
-
-  // Widget _label() {
-  //   return Container(
-  //       margin: EdgeInsets.only(top: 40, bottom: 20),
-  //       child: Column(
-  //         children: <Widget>[
-  //           Text(
-  //             'Quick login with Touch ID',
-  //             style: TextStyle(color: Colors.white, fontSize: 17),
-  //           ),
-  //           SizedBox(
-  //             height: 20,
-  //           ),
-  //           Icon(Icons.fingerprint, size: 90, color: Colors.white),
-  //           SizedBox(
-  //             height: 20,
-  //           ),
-  //           Text(
-  //             'Touch ID',
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontSize: 15,
-  //               decoration: TextDecoration.underline,
-  //             ),
-  //           ),
-  //         ],
-  //       ));
-  // }
 
   Widget _title() {
     return RichText(

@@ -3,14 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'Option.dart';
 
-Widget timing(BuildContext context) {
-  Future.delayed(Duration(seconds: 1), () {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => OptionPage()));
-  });
-  return Scaffold();
-}
-
 class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,6 +23,25 @@ class MyWelcomePage extends StatefulWidget {
 class _welcomePageState extends State<MyWelcomePage> {
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 1), () {
+      Navigator.push(
+        context,
+        PageRouteBuilder(
+            transitionDuration: Duration(seconds: 1),
+            transitionsBuilder: (context, animation, animationTime, child) {
+              animation = CurvedAnimation(
+                  parent: animation, curve: Curves.elasticInOut);
+              return ScaleTransition(
+                alignment: Alignment.centerRight,
+                scale: animation,
+                child: child,
+              );
+            },
+            pageBuilder: (context, animation, animationTime) {
+              return OptionPage();
+            }),
+      );
+    });
     return Scaffold(
         backgroundColor: Color(0xffFDD610),
         body: Column(children: <Widget>[
@@ -64,7 +75,7 @@ class _welcomePageState extends State<MyWelcomePage> {
                   padding: EdgeInsets.only(top: 0),
                 ),
               ]),
-          timing(context),
+          // timing(context),
         ]));
   }
 }

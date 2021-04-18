@@ -6,20 +6,20 @@ String welcomeToJson(Welcome data) => json.encode(data.toJson());
 
 class Welcome {
   Welcome({
-    this.username,
-    this.password,
+    this.fName,
+    this.lName,
   });
 
-  String username;
-  String password;
+  String fName;
+  String lName;
 
   factory Welcome.fromJson(Map<String, dynamic> json) => Welcome(
-        username: json["username"],
-        password: json["password"],
+        fName: json["fName"],
+        lName: json["lName"],
       );
 
   Map<String, dynamic> toJson() => {
-        "username": username,
-        "password": password,
+        "username": fName,
+        "password": lName,
       };
 }

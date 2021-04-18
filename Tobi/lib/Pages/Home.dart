@@ -1,29 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'Breed_PageOne.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class MyHomePage extends StatefulWidget {
-  FirebaseUser user;
+  User user;
   MyHomePage({Key key, this.user}) : super(key: key);
 
   @override
   _homePageState createState() => _homePageState(user);
 }
 
+Future<Widget> _getImage(BuildContext context, String imageName) async {
+  Image image;
+  await FireStorageService.loadImage(context, imageName).then((value) {
+    image = Image.network(
+      value.toString(),
+      height: 50.0,
+      width: 50.0,
+      fit: BoxFit.scaleDown,
+    );
+  });
+  return image;
+}
+
 class _homePageState extends State<MyHomePage> {
-  FirebaseUser user;
+  User user;
+  String name = "User";
+
   _homePageState(this.user);
 
   @override
   Widget build(BuildContext context) {
     String _uid;
-    String _email;
-
-    // CollectionReference users = Firestore.instance.collection('UserData');
-
     _uid = '${widget.user.uid}';
-    _email = '${widget.user.email}';
+    String profilePicName = _uid + "_User.jpg";
+
+    Stream<DocumentSnapshot> provideDocumentFieldStream() {
+      return FirebaseFirestore.instance
+          .collection('UserData')
+          .doc(_uid)
+          .snapshots();
+    }
 
     return Scaffold(
       body: Center(
@@ -72,11 +91,18 @@ class _homePageState extends State<MyHomePage> {
                         ),
                         child: ClipRRect(
                           borderRadius: new BorderRadius.circular(50.0),
-                          child: new Image.asset(
-                            'assets/homePage/IMG-20200920-WA0078.jpg',
-                            height: 50.0,
-                            width: 50.0,
-                            fit: BoxFit.fitHeight,
+                          child: FutureBuilder(
+                            future: _getImage(context, profilePicName),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.done) {
+                                return Container(
+                                  child: snapshot.data,
+                                );
+                              }
+
+                              return Container();
+                            },
                           ),
                         ),
                       ),
@@ -95,10 +121,23 @@ class _homePageState extends State<MyHomePage> {
                       bottom: 130.0,
                       top: 43.0,
                     ),
-                    child: new Text(
-                      "Welcome back, " + _uid,
-                      style: new TextStyle(fontSize: 30.0, fontFamily: 'Actor'),
-                    ),
+                    child: StreamBuilder<DocumentSnapshot>(
+                        stream: provideDocumentFieldStream(),
+                        builder: (context,
+                            AsyncSnapshot<DocumentSnapshot> snapshot) {
+                          if (snapshot.hasData) {
+                            Map<String, dynamic> documentFields =
+                                snapshot.data.data();
+
+                            name = documentFields['fName'];
+
+                            return new Text(
+                              "Welcome back, " + name,
+                              style: new TextStyle(
+                                  fontSize: 30.0, fontFamily: 'Actor'),
+                            );
+                          }
+                        }),
                   ),
                 ],
               ),
@@ -361,5 +400,12 @@ class _homePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+}
+
+class FireStorageService extends ChangeNotifier {
+  FireStorageService();
+  static Future<dynamic> loadImage(BuildContext context, String image) async {
+    return await FirebaseStorage.instance.ref().child(image).getDownloadURL();
   }
 }
