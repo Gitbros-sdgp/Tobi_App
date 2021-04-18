@@ -1,5 +1,7 @@
 # Imports
 from firebase import firebase
+import cv2 as cv
+import numpy as np
 
 # Connection to the User-Credentials database
 dbConeection = firebase.FirebaseApplication('https://test-3f1bf-default-rtdb.firebaseio.com/', None)
@@ -17,6 +19,14 @@ class AccountDatabase:
             'Password':password
         }
         dbConeection.post('test-3f1bf-default-rtdb/User-Credentials', data)
+
+    def read_img(path, size):
+        image = cv.imread(path, cv.IMREAD_COLOR)
+        image = cv.resize(image, (size, size))
+        image = image / 255.0
+        image = image.astype(np.float32)
+
+        return image
 
     # To verify the users credentials
     def verify(user, password):

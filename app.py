@@ -3,6 +3,8 @@ import json
 from flask import Flask, jsonify, request
 from SignUp import SignUp as sig
 from login import login as log
+from breedClassification import  breedClassification as breed
+
 
 login_username = ''
 login_password = ''
@@ -67,6 +69,16 @@ def login():
             'Error': 'Error 405 - Method Not Allowed'
         }
         return jsonify(data)
+
+@app.route('/breed', methods=['GET', 'POST'])
+def breed():
+
+
+
+    if request.method == 'GET':
+        result = breed.verifyBreed(path='https://firebasestorage.googleapis.com/v0/b/test-3f1bf.appspot.com/o/download.jpg?alt=media&token=03b09db3-29f3-40eb-be21-6b276b976708', size=224)
+
+        return jsonify(result)
 
 
 # Running the flask app
