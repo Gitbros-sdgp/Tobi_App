@@ -4,8 +4,8 @@ import pandas as pd
 import cv2 as cv
 from AccountDatabase import AccountDatabase
 
-# import tensorflow as tf
-import keras
+import tensorflow as tf
+# import keras
 
 class breedClassification:
 
@@ -19,7 +19,7 @@ class breedClassification:
         breeds = labels_read['breed'].unique()
 
         id2breeds = {i: name for i, name in enumerate(breeds)}
-        model = keras.models.load_model('Breed_Model.h5')
+        model = tf.keras.models.load_model('Breed_Model.h5')
 
         image = AccountDatabase.read_img(path=path, size=size)
         image = np.expand_dims(image, axis=0)
