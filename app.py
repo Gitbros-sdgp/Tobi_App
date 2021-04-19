@@ -13,7 +13,7 @@ app = Flask(__name__)
 def breed():
 
     if request.method == 'GET':
-        result = Breed.verifyBreed(self=Breed, path='download.jpg', size=224)
+        result = Breed.verifyBreed(self=Breed, path='German.jpg', size=224)
 
         return jsonify(result)
 
