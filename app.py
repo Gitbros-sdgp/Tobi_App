@@ -1,7 +1,7 @@
 # Imports
 import json
 from flask import Flask, jsonify, request
-from breedClassification import breedClassification as breed
+from breedClassification import breedClassification as Breed
 
 # Flask App
 app = Flask(__name__)
@@ -13,7 +13,7 @@ app = Flask(__name__)
 def breed():
 
     if request.method == 'GET':
-        result = breed.verifyBreed()
+        result = Breed.verifyBreed(self=Breed, path='download.jpg', size=224)
 
         return jsonify(result)
 

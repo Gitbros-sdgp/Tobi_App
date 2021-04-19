@@ -5,7 +5,7 @@ import numpy as np
 class readImg:
 
     # Converts the image sent by the user to something the model can understand.
-    def read_img(path, size):
+    def read_img(self, path, size):
         image = cv.imread(path, cv.IMREAD_COLOR)
         image = cv.resize(image, (size, size))
         image = image / 255.0
