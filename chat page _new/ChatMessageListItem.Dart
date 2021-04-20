@@ -22,3 +22,27 @@ class ChatMessageListItem extends StatelessWidget {
       ),
     );
   }
+
+  List<Widget> getSentMessageLayout() {
+    return <Widget>[
+      new Expanded(
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            new Text(messageSnapshot.value['senderName'],
+                style: new TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold)),
+            new Container(
+              margin: const EdgeInsets.only(top: 5.0),
+              child: messageSnapshot.value['imageUrl'] != null
+                  ? new Image.network(
+                      messageSnapshot.value['imageUrl'],
+                      width: 250.0,
+                    )
+                  : new Text(messageSnapshot.value['text']),
+            ),
+          ],
+        ),
+      ),
