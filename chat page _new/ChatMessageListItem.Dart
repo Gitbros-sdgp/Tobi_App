@@ -46,3 +46,30 @@ class ChatMessageListItem extends StatelessWidget {
           ],
         ),
       ),
+      new Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          new Container(
+              margin: const EdgeInsets.only(left: 8.0),
+              child: new CircleAvatar(
+                backgroundImage:
+                    new NetworkImage(messageSnapshot.value['senderPhotoUrl']),
+              )),
+        ],
+      ),
+    ];
+  }
+
+  List<Widget> getReceivedMessageLayout() {
+    return <Widget>[
+      new Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new Container(
+              margin: const EdgeInsets.only(right: 8.0),
+              child: new CircleAvatar(
+                backgroundImage:
+                    new NetworkImage(messageSnapshot.value['senderPhotoUrl']),
+              )),
+        ],
+      ),
