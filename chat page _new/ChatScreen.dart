@@ -70,3 +70,68 @@ class ChatScreenState extends State<ChatScreen> {
               : null,
         ));
   }
+
+  CupertinoButton getIOSSendButton() {
+    return new CupertinoButton(
+      child: new Text("Send"),
+      onPressed: _isComposingMessage
+          ? () => _textMessageSubmitted(_textEditingController.text)
+          : null,
+    );
+  }
+
+  IconButton getDefaultSendButton() {
+    return new IconButton(
+      icon: new Icon(Icons.send),
+      onPressed: _isComposingMessage
+          ? () => _textMessageSubmitted(_textEditingController.text)
+          : null,
+    );
+  }
+
+  Widget _buildTextComposer() {
+    return new IconTheme(
+        data: new IconThemeData(
+          color: _isComposingMessage
+              ? Theme.of(context).accentColor
+              : Theme.of(context).disabledColor,
+        ),
+        child: new Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: new Row(
+            children: <Widget>[
+              new Container(
+                margin: new EdgeInsets.symmetric(horizontal: 4.0),
+                child: new IconButton(
+                    icon: new Icon(
+                      Icons.photo_camera,
+                      color: Theme.of(context).accentColor,
+                    ),
+                    onPressed: () async {
+                      await _ensureLoggedIn();
+                      File imageFile = await ImagePicker.pickImage();
+                      int timestamp = new DateTime.now().millisecondsSinceEpoch;
+                      StorageReference storageReference = FirebaseStorage
+                          .instance
+                          .ref()
+                          .child("img_" + timestamp.toString() + ".jpg");
+                      StorageUploadTask uploadTask =
+                          storageReference.put(imageFile);
+                      Uri downloadUrl = (await uploadTask.future).downloadUrl;
+                      _sendMessage(
+                          messageText: null, imageUrl: downloadUrl.toString());
+                    }),
+              ),
+              new Flexible(
+                child: new TextField(
+                  controller: _textEditingController,
+                  onChanged: (String messageText) {
+                    setState(() {
+                      _isComposingMessage = messageText.length > 0;
+                    });
+                  },
+                  onSubmitted: _textMessageSubmitted,
+                  decoration:
+                      new InputDecoration.collapsed(hintText: "Send a message"),
+                ),
+              ),
