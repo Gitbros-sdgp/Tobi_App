@@ -1,3 +1,5 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter';
 
 var currentUserEmail;
 
@@ -73,3 +75,27 @@ class ChatMessageListItem extends StatelessWidget {
               )),
         ],
       ),
+      new Expanded(
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            new Text(messageSnapshot.value['senderName'],
+                style: new TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold)),
+            new Container(
+              margin: const EdgeInsets.only(top: 5.0),
+              child: messageSnapshot.value['imageUrl'] != null
+                  ? new Image.network(
+                      messageSnapshot.value['imageUrl'],
+                      width: 250.0,
+                    )
+                  : new Text(messageSnapshot.value['text']),
+            ),
+          ],
+        ),
+      ),
+    ];
+  }
+}
