@@ -135,3 +135,24 @@ class ChatScreenState extends State<ChatScreen> {
                       new InputDecoration.collapsed(hintText: "Send a message"),
                 ),
               ),
+              new Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                child: Theme.of(context).platform == TargetPlatform.iOS
+                    ? getIOSSendButton()
+                    : getDefaultSendButton(),
+              ),
+            ],
+          ),
+        ));
+  }
+
+  Future<Null> _textMessageSubmitted(String text) async {
+    _textEditingController.clear();
+
+    setState(() {
+      _isComposingMessage = false;
+    });
+
+    await _ensureLoggedIn();
+    _sendMessage(messageText: text, imageUrl: null);
+  }
