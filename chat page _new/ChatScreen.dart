@@ -49,3 +49,24 @@ class ChatScreenState extends State<ChatScreen> {
                   },
                 ),
               ),
+              new Divider(height: 1.0),
+              new Container(
+                decoration:
+                    new BoxDecoration(color: Theme.of(context).cardColor),
+                child: _buildTextComposer(),
+              ),
+              new Builder(builder: (BuildContext context) {
+                _scaffoldContext = context;
+                return new Container(width: 0.0, height: 0.0);
+              })
+            ],
+          ),
+          decoration: Theme.of(context).platform == TargetPlatform.iOS
+              ? new BoxDecoration(
+                  border: new Border(
+                      top: new BorderSide(
+                  color: Colors.grey[200],
+                )))
+              : null,
+        ));
+  }
