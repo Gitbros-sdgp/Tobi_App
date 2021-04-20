@@ -1,3 +1,9 @@
+import 'package:animated_theme_switcher/animated_theme_switcher.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:profile_app_ui/constants.dart';
+import 'package:profile_app_ui/widgets/profile_list_item.dart';
 
 
 
@@ -134,3 +140,50 @@ class ProfileScreen extends StatelessWidget {
         SizedBox(width: kSpacingUnit.w * 3),
       ],
     );
+return ThemeSwitchingArea(
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            body: Column(
+              children: <Widget>[
+                SizedBox(height: kSpacingUnit.w * 5),
+                header,
+                Expanded(
+                  child: ListView(
+                    children: <Widget>[
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.user_shield,
+                        text: 'Privacy',
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.history,
+                        text: 'Purchase History',
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.question_circle,
+                        text: 'Help & Support',
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.cog,
+                        text: 'Settings',
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.user_plus,
+                        text: 'Invite a Friend',
+                      ),
+                      ProfileListItem(
+                        icon: LineAwesomeIcons.alternate_sign_out,
+                        text: 'Logout',
+                        hasNavigation: false,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
