@@ -180,3 +180,62 @@ class _DoctorViewState extends State<DoctorView> {
                           ],
                         ),
                       )),
+   ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        height: 150,
+                        width: 100,
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: Container(
+                                  height: 80,
+                                  width: 80,
+                                  color: Color.fromARGB(0xff, 248, 248, 248),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Icon(FontAwesomeIcons.earlybirds),
+                                  ),
+                                )),
+                            Text("Birds")
+                          ],
+                        ),
+                      )),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 32, top: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: RichText(
+                        text: TextSpan(children: <TextSpan>[
+                      TextSpan(
+                          text: "Top ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.black,
+                          )),
+                      TextSpan(
+                          text: "Rated Doctor ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            fontSize: 20,
+                            color: Colors.black,
+                          )),
+                    ])),
+                  ),
+                  Text("See All",
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ))
+                ],
+              ),
+            ),
