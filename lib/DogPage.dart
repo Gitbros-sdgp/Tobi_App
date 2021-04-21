@@ -1,8 +1,9 @@
-import 'package:dog_library/main.dart';
+import 'package:dog_breed_details/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:flutter/services.dart';
-import 'package:dog_library/DogBreedsList.dart';
+import 'package:dog_breed_details/DogBreedsList.dart';
 
 void main() => runApp(DogPageApp());
 
