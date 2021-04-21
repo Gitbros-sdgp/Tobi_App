@@ -1,4 +1,7 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'pet.freezed.dart';
+part 'pet.g.dart';
 @freezed
 
 /// [Pet] data class
