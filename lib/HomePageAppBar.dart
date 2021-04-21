@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/main.dart';
+import 'package:dog_breed_details/main.dart';
 
 class HomePageAppBar extends StatelessWidget with PreferredSizeWidget {
   final title = 'Dog Breeds';
