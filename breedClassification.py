@@ -10,7 +10,7 @@ class breedClassification:
 
     # Gets the usable image from readImg class and passes it to the model, which in turn sends the classified breed.
     def verifyBreed(self, path, size):
-        labels_dir =  'Labels.csv'
+        labels_dir = 'Labels.csv'
 
         labels_read = pd.read_csv(labels_dir)
         breeds = labels_read['breed'].unique()
@@ -29,6 +29,6 @@ class breedClassification:
 
         # ori_image = cv.putText(ori_image, breed_names, (0, 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
         data = {
-            "BreedName":breed_names
+            "BreedName": breed_names
         }
         return data
