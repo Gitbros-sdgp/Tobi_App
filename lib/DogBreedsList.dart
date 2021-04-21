@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:dog_library/DogPage.dart';
+import 'package:dog_breed_details/DogPage.dart';
 import 'package:flutter/material.dart';
-import 'package:dog_library/entities/Data.dart';
+import 'package:dog_breed_details/entities/Data.dart';
 import 'package:http/http.dart' as http;
-import 'package:dog_library/HomePageAppBar.dart';
-import 'package:dog_library/main.dart';
+import 'package:dog_breed_details/HomePageAppBar.dart';
+import 'package:dog_breed_details/main.dart';
 
 void main() => runApp(MyApp());
 
