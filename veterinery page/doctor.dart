@@ -52,3 +52,131 @@ class _DoctorViewState extends State<DoctorView> {
                           ],
                         ),
                       ),
+    Padding(
+                          padding: EdgeInsets.only(left: 16, top: 32),
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: RichText(
+                              text: TextSpan(children: <TextSpan>[
+                                TextSpan(
+                                    text: "Find ",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    )),
+                                TextSpan(
+                                    text: "Your Pet ",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ))
+                              ]),
+                            ),
+                          )),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Text(
+                            "Doctor",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w200,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  margin: EdgeInsets.only(top: 220, left: 16, right: 16),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        labelText: "Looking for",
+                        suffixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5))),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 32, top: 32),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    "Categories",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  Text(
+                    "See All",
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        height: 150,
+                        width: 100,
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: Container(
+                                  height: 80,
+                                  width: 80,
+                                  color: Color.fromARGB(0xff, 248, 248, 248),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Icon(FontAwesomeIcons.dog),
+                                  ),
+                                )),
+                            Text("Dog")
+                          ],
+                        ),
+                      )),
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Container(
+                        height: 150,
+                        width: 100,
+                        color: Colors.white,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: Container(
+                                  height: 80,
+                                  width: 80,
+                                  color: Color.fromARGB(0xff, 248, 248, 248),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Icon(FontAwesomeIcons.cat),
+                                  ),
+                                )),
+                            Text("Cats")
+                          ],
+                        ),
+                      )),
