@@ -35,7 +35,7 @@ class _homePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     String _uid;
     _uid = '${widget.user.uid}';
-    String profilePicName = _uid + "_User.jpg";
+    String profilePicName = "UserProfileImages/" + _uid + "_User.jpg";
 
     Stream<DocumentSnapshot> provideDocumentFieldStream() {
       return FirebaseFirestore.instance
@@ -79,7 +79,7 @@ class _homePageState extends State<MyHomePage> {
                         height: 50.0,
                         width: 50.0,
                         decoration: new BoxDecoration(
-                          borderRadius: new BorderRadius.circular(50.0),
+                          borderRadius: new BorderRadius.circular(100.0),
                           color: Color(0xFFF5F5FA),
                           boxShadow: [
                             BoxShadow(
@@ -206,7 +206,7 @@ class _homePageState extends State<MyHomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MyBreedPageOne()));
+                                  builder: (context) => BreedPageOne()));
                         },
                       ),
                     ),

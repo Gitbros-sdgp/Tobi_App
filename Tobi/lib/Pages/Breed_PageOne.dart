@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
+import 'Breed_PageTwo.dart';
 
-class BreedPageOne extends StatelessWidget {
+class BreedPageOne extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Confirm Page',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Roboto'),
-      home: MyBreedPageOne(),
-    );
-  }
+  MyBreedPageOne createState() => MyBreedPageOne();
 }
 
-class MyBreedPageOne extends StatelessWidget {
+class MyBreedPageOne extends State<BreedPageOne> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       body: Center(
-        child: Column(
-          children: <Widget>[
-            new Row(
-              children: <Widget>[
-                Container(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          color: Color(0xFFF5F5FA),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
                     decoration: BoxDecoration(color: Color(0xFFFFD500)),
                     height: 256.0,
                     width: 410.0,
@@ -29,12 +29,12 @@ class MyBreedPageOne extends StatelessWidget {
                       alignment: Alignment.center,
                       children: <Widget>[
                         ClipRRect(
-                          borderRadius: new BorderRadius.circular(60.0),
+                          borderRadius: new BorderRadius.circular(100.0),
                           child: new Image.asset(
                             "assets/BreedPageTwo/dog2.png",
-                            height: 113.0,
+                            height: 121.0,
                             width: 121.0,
-                            fit: BoxFit.cover,
+                            fit: BoxFit.scaleDown,
                           ),
                         ),
                         Padding(
@@ -46,89 +46,117 @@ class MyBreedPageOne extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ))
-              ],
-            ),
-            Container(
-              margin: const EdgeInsets.all(30),
-              padding: const EdgeInsets.all(40),
-              decoration: BoxDecoration(
-                color: Color(0xFFF5F5FA),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(6, 8), // changes position of shadow
+                    ),
                   ),
                 ],
               ),
-              height: 170.0,
-              child: Text(
-                'Upload an image of an dog using the "Upload" button below. then, after a moment you will get the result.',
-                style: TextStyle(fontSize: 18.0),
-                textAlign: TextAlign.justify,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(30, 0, 30, 20),
-              decoration: BoxDecoration(
-                color: Color(0xFFF5F5FA),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: Offset(6, 8), // changes position of shadow
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 20.0,
+                    ),
+                    child: Container(
+                      width: 350.0,
+                      margin: const EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(40),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF5F5FA),
+                        borderRadius: BorderRadius.circular(30.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(6, 8), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      height: 175.0,
+                      child: Text(
+                        'Select an image from your phone or open your camera and take a photo. Then upload the photo.',
+                        style: TextStyle(fontSize: 18.0),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
                   ),
                 ],
               ),
-              height: 197.0,
-            ),
-            new Row(children: <Widget>[
-              Container(
-                margin: const EdgeInsets.fromLTRB(48, 0, 12, 0),
-                width: 127.0,
-                height: 47.0,
-                child: MaterialButton(
-                  child: Text(
-                    'Upload',
-                    style: TextStyle(fontSize: 16.0),
-                  ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                  color: Color(0xFFFFD500),
-                  onPressed: () {},
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 50.0,
+                ),
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      margin: const EdgeInsets.fromLTRB(48, 0, 12, 0),
+                      width: 127.0,
+                      height: 47.0,
+                      child: MaterialButton(
+                        child: Text(
+                          'Select from device',
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                        color: Color(0xFFFFD500),
+                        onPressed: () {},
+                      ),
+                    ),
+                    new Text("or"),
+                    new Container(
+                      margin: const EdgeInsets.fromLTRB(12, 0, 42, 0),
+                      width: 140.0,
+                      height: 47.0,
+                      child: MaterialButton(
+                        child: Text(
+                          'Open Camera',
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                        color: Color(0xFFFFD500),
+                        onPressed: () {},
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              Text("Or"),
-              Container(
-                margin: const EdgeInsets.fromLTRB(12, 0, 42, 0),
-                width: 127.0,
-                height: 47.0,
-                child: MaterialButton(
-                  child: Text(
-                    'Select again',
-                    style: TextStyle(fontSize: 16.0),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 50.0,
+                    ),
+                    child: new Container(
+                      margin: const EdgeInsets.fromLTRB(48, 0, 12, 0),
+                      width: 127.0,
+                      height: 47.0,
+                      child: MaterialButton(
+                        child: Text(
+                          'Upload',
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        color: Color(0xFFFFD500),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BreedPageTwo()));
+                        },
+                      ),
+                    ),
                   ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0)),
-                  color: Color(0xFFFFD500),
-                  onPressed: () {},
-                ),
-              )
-            ])
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
