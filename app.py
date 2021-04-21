@@ -28,7 +28,7 @@ def breed():
         return ' '
 
     elif request.method == 'GET':
-        result = Breed.verifyBreed(self=Breed, path='TestApiData/BreedImage/lab.jpg', size=224)
+        result = Breed.verifyBreed(self=Breed, path=image, size=224)
         return jsonify(result)
 
     else:
