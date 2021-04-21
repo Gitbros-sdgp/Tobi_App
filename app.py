@@ -3,8 +3,12 @@ import json
 from flask import Flask, jsonify, request
 from BreedImage.breedClassification import breedClassification as Breed
 from EmotionAudio.inference import audio_classify as audio
+from EmotionImage.emotionClassification import emotionClassification as emo
+from EmotionFinal.Emotion import verifyEmotion as elmo
+from EmotionImage.audioClip import videoToAudio as hehe
 
 image = None
+vid = None
 
 # Flask App
 app = Flask(__name__)
@@ -36,9 +40,16 @@ def breed():
 @app.route('/emotion', methods=['GET', 'POST'])
 def emotion():
 
-    if request.method == 'GET':
-        argv = ['TestApiData/EmotionAudio/bark.wav']
-        result = audio(argv=argv)
+    global vid
+
+    if request.method == 'POST':
+        request_data = request.data
+        request_data = json.loads(request_data.decode('utf-8'))
+        vid = request_data['__emotionVid']
+        return ' '
+
+    elif request.method == 'GET':
+        result = elmo(video=vid)
         return jsonify(result)
 
     else:

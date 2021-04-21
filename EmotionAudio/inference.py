@@ -16,8 +16,6 @@
 """Inference demo for YAMNet."""
 from __future__ import division, print_function
 
-
-
 import numpy as np
 import resampy
 import soundfile as sf
@@ -54,7 +52,6 @@ def audio_classify(argv):
         # Report the highest-scoring classes and their scores.
         top5_i = np.argsort(prediction)[::-1][:5]
 
-
         results = []
         resultsPercentage = []
 
@@ -78,16 +75,13 @@ def audio_classify(argv):
                 results.append(yamnet_classes[i])
                 resultsPercentage.append(prediction[i])
 
-
-        for i in results:
-            for j in resultsPercentage:
-
-                data = {
-                    "soundName": i,
-                    "percentage": j * 100
-                }
-                results.clear()
-                resultsPercentage.clear()
-                return data
+        if len(results) != 0:
+            for i in results:
+                for j in resultsPercentage:
+                    results.clear()
+                    resultsPercentage.clear()
+                    return i, j * 100
+        else:
+            return 'No sound', 0.0
 
 
