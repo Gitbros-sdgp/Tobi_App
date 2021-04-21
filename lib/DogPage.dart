@@ -35,7 +35,7 @@ class DogPageApp extends StatelessWidget {
     return MaterialApp(
       title: 'Dog Breeds',
       theme: ThemeData(
-          //primarySwatch: Colors.blue,
+          //primarySwatch: Colors.yellow,
           ),
       home: DogPage(),
     );
@@ -54,7 +54,7 @@ class DogPage extends StatelessWidget {
             )),
         floatingActionButton: new FloatingActionButton(
           onPressed: null,
-          backgroundColor: Colors.deepPurple[800],
+          backgroundColor: Colors.yellow.shade400,
           mini: true,
           child: new Icon(Icons.favorite_border),
         ),
