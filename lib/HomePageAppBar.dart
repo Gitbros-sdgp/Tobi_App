@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:dog_breed_details/main.dart';
+import 'package:flutter/material.dart';
 
 class HomePageAppBar extends StatelessWidget with PreferredSizeWidget {
   final title = 'Dog Breeds';
@@ -8,7 +8,7 @@ class HomePageAppBar extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return new AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: purple,
+      backgroundColor: yellow,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,

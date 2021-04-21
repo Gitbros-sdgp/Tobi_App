@@ -49,7 +49,7 @@ class DogPage extends StatelessWidget {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(0.0),
             child: AppBar(
-              backgroundColor: purple,
+              backgroundColor: yellow,
               elevation: 0.0,
             )),
         floatingActionButton: new FloatingActionButton(
@@ -268,7 +268,7 @@ class BreedBehaviourTitle extends StatelessWidget {
         margin: EdgeInsets.only(left: 26.0),
         child: Text('Children And Other Pets',
             style: TextStyle(
-                fontSize: 25.0, color: purple, fontWeight: FontWeight.w400)));
+                fontSize: 25.0, color: yellow, fontWeight: FontWeight.w400)));
   }
 }
 
@@ -301,7 +301,7 @@ class BreedGroomingTitle extends StatelessWidget {
         margin: EdgeInsets.only(left: 26.0),
         child: Text('Coat Color And Grooming',
             style: TextStyle(
-                fontSize: 25.0, color: purple, fontWeight: FontWeight.w400)));
+                fontSize: 25.0, color: yellow, fontWeight: FontWeight.w400)));
   }
 }
 
@@ -334,7 +334,7 @@ class BreedFeedingTitle extends StatelessWidget {
         margin: EdgeInsets.only(left: 26.0),
         child: Text('Feeding',
             style: TextStyle(
-                fontSize: 25.0, color: purple, fontWeight: FontWeight.w400)));
+                fontSize: 25.0, color: yellow, fontWeight: FontWeight.w400)));
   }
 }
 
@@ -367,7 +367,7 @@ class BreedCareTitle extends StatelessWidget {
         margin: EdgeInsets.only(left: 26.0),
         child: Text('Care',
             style: TextStyle(
-                fontSize: 25.0, color: purple, fontWeight: FontWeight.w400)));
+                fontSize: 25.0, color: yellow, fontWeight: FontWeight.w400)));
   }
 }
 
@@ -400,7 +400,7 @@ class BreedHealthTitle extends StatelessWidget {
         margin: EdgeInsets.only(left: 26.0),
         child: Text('Health',
             style: TextStyle(
-                fontSize: 25.0, color: purple, fontWeight: FontWeight.w400)));
+                fontSize: 25.0, color: yellow, fontWeight: FontWeight.w400)));
   }
 }
 
@@ -433,7 +433,7 @@ class BreedPersonalityTitle extends StatelessWidget {
         margin: EdgeInsets.only(left: 26.0),
         child: Text('Personality',
             style: TextStyle(
-                fontSize: 25.0, color: purple, fontWeight: FontWeight.w400)));
+                fontSize: 25.0, color: yellow, fontWeight: FontWeight.w400)));
   }
 }
 
@@ -466,7 +466,7 @@ class BreedSizeTitle extends StatelessWidget {
         margin: EdgeInsets.only(left: 26.0),
         child: Text('Size',
             style: TextStyle(
-                fontSize: 25.0, color: purple, fontWeight: FontWeight.w400)));
+                fontSize: 25.0, color: yellow, fontWeight: FontWeight.w400)));
   }
 }
 
@@ -482,8 +482,8 @@ class BreedActivityCircularPercentIndicator extends StatelessWidget {
       lineWidth: 2.0,
       percent: double.parse(currentBreedActivityNumber),
       center:
-          new Text(currentBreedActivityText, style: TextStyle(color: purple)),
-      progressColor: purple,
+          new Text(currentBreedActivityText, style: TextStyle(color: yellow)),
+      progressColor: yellow,
       backgroundColor: Colors.grey[300],
       animation: true,
       animationDuration: 1200,
@@ -505,10 +505,10 @@ class BreedFriendlinessCircularPercentIndicator extends StatelessWidget {
       percent: double.parse(currentBreedFriendlinessNumber),
       center: new Text(
         currentBreedFriendlinessText,
-        style: TextStyle(color: purple),
+        style: TextStyle(color: yellow),
       ),
       backgroundColor: Colors.grey[300],
-      progressColor: purple,
+      progressColor: yellow,
       animation: true,
       animationDuration: 1200,
       circularStrokeCap: CircularStrokeCap.round,
@@ -545,7 +545,7 @@ class BreedShortHistoryTitle extends StatelessWidget {
         margin: EdgeInsets.only(top: 26.0, left: 26.0),
         child: Text('Short history',
             style: TextStyle(
-                fontSize: 25.0, color: purple, fontWeight: FontWeight.w400)));
+                fontSize: 25.0, color: yellow, fontWeight: FontWeight.w400)));
   }
 }
 
@@ -635,7 +635,7 @@ class PurpleBackground extends StatelessWidget {
         height: 330.0,
         //color: purple,
         decoration: new BoxDecoration(
-          color: purple,
+          color: yellow,
           image: DecorationImage(
             image: NetworkImage(
                 'https://github.com/Gitbros-sdgp/Tobi_App/blob/35e18f04281edc20eb949b0785b8bbdcdf43c145/tobiimg1.png'),

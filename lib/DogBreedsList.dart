@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Dog Breeds: Homepage',
       theme: ThemeData(
-        primarySwatch: Colors.yellow.shade800,
+        primarySwatch: Colors.yellow,
       ),
       home: HomePage(),
     );
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
         return Container(
           decoration: new BoxDecoration(
             shape: BoxShape.rectangle,
-            color: purple.withOpacity(0.5),
+            color: yellow.withOpacity(0.5),
           ),
           child: AlertDialog(
             title: new Text("Ooops, something went wrong"),
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
               new FlatButton(
                 child: new Text("Refresh",
                     style: TextStyle(
-                        color: purple,
+                        color: yellow,
                         fontSize: 18.0,
                         fontWeight: FontWeight.w600)),
                 onPressed: () {
@@ -219,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                       margin: EdgeInsets.only(left: 56.0),
                       child: Text(_breedsForDisplay[index].breed,
                           style: TextStyle(
-                              color: purple,
+                              color: yellow,
                               fontSize: 20.0,
                               fontWeight: FontWeight.w300))),
                   /* Description */
