@@ -40,6 +40,7 @@ def emotion():
         argv = ['TestApiData/EmotionAudio/bark.wav']
         result = audio(argv=argv)
         return jsonify(result)
+
     else:
         data = {
             'Error': "Error 305 - Method Not Allowed!"

@@ -1,10 +1,8 @@
 # Imports
 import numpy as np
 import pandas as pd
-import cv2 as cv
 from BreedImage.readImg import readImg
 import tensorflow as tf
-
 
 class breedClassification:
 
@@ -24,11 +22,8 @@ class breedClassification:
         label_idx = np.argmax(pred)
         breed_names = id2breeds[label_idx]
 
-        # ori_breed = breeds
-        ori_image = cv.imread(path, cv.IMREAD_COLOR)
-
-        # ori_image = cv.putText(ori_image, breed_names, (0, 10), cv.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 1)
         data = {
             "BreedName": breed_names
         }
+
         return data
