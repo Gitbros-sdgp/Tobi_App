@@ -22,16 +22,16 @@ import numpy as np
 import resampy
 import soundfile as sf
 
-import params as yamnet_params
-import yamnet as yamnet_model
+import EmotionAudio.params as yamnet_params
+import EmotionAudio.yamnet as yamnet_model
 
 def audio_classify(argv):
     # assert argv, 'Usage: inference.py <wav file> <wav file> ...'
 
     params = yamnet_params.Params()
     yamnet = yamnet_model.yamnet_frames_model(params)
-    yamnet.load_weights('yamnet.h5')
-    yamnet_classes = yamnet_model.class_names('yamnet_class_map.csv')
+    yamnet.load_weights('models/yamnet.h5')
+    yamnet_classes = yamnet_model.class_names('labels/yamnet_class_map.csv')
 
     for file_name in argv:
         # Decode the WAV file.
