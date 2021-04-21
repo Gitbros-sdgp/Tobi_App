@@ -1,7 +1,8 @@
 # Imports
 import json
 from flask import Flask, jsonify, request
-from breedClassification import breedClassification as Breed
+from BreedImage.breedClassification import breedClassification as Breed
+from EmotionAudio.inference import audio_classify as audio
 
 image = None
 
@@ -23,7 +24,7 @@ def breed():
         return ' '
 
     elif request.method == 'GET':
-        result = Breed.verifyBreed(self=Breed, path=image, size=224)
+        result = Breed.verifyBreed(self=Breed, path='TestApiData/BreedImage/lab.jpg', size=224)
         return jsonify(result)
 
     else:
@@ -32,6 +33,18 @@ def breed():
         }
         return data
 
+@app.route('/emotion', methods=['GET', 'POST'])
+def emotion():
+
+    if request.method == 'GET':
+        argv = ['TestApiData/EmotionAudio/bark.wav']
+        result = audio(argv=argv)
+        return jsonify(result)
+    else:
+        data = {
+            'Error': "Error 305 - Method Not Allowed!"
+        }
+        return data
 
 # Running the flask app
 if __name__ == '__main__':

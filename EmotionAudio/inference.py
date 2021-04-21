@@ -88,7 +88,6 @@ def audio_classify(argv):
                 }
                 results.clear()
                 resultsPercentage.clear()
-
                 return data
 
 
