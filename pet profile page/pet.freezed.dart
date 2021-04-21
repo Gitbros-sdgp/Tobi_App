@@ -1,4 +1,5 @@
 
+part of 'pet.dart';
 
 T _$identity<T>(T value) => value;
 Pet _$PetFromJson(Map<String, dynamic> json) {
@@ -366,3 +367,281 @@ class _$PetCategoryCopyWithImpl<$Res> implements $PetCategoryCopyWith<$Res> {
   final PetCategory _value;
   // ignore: unused_field
   final $Res Function(PetCategory) _then;
+
+  @override
+  $Res call({
+    Object petCategoryId = freezed,
+    Object name = freezed,
+  }) {
+    return _then(_value.copyWith(
+      petCategoryId: petCategoryId == freezed
+          ? _value.petCategoryId
+          : petCategoryId as String,
+      name: name == freezed ? _value.name : name as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$PetCategoryCopyWith<$Res>
+    implements $PetCategoryCopyWith<$Res> {
+  factory _$PetCategoryCopyWith(
+          _PetCategory value, $Res Function(_PetCategory) then) =
+      __$PetCategoryCopyWithImpl<$Res>;
+  @override
+  $Res call({String petCategoryId, String name});
+}
+
+/// @nodoc
+class __$PetCategoryCopyWithImpl<$Res> extends _$PetCategoryCopyWithImpl<$Res>
+    implements _$PetCategoryCopyWith<$Res> {
+  __$PetCategoryCopyWithImpl(
+      _PetCategory _value, $Res Function(_PetCategory) _then)
+      : super(_value, (v) => _then(v as _PetCategory));
+
+  @override
+  _PetCategory get _value => super._value as _PetCategory;
+
+  @override
+  $Res call({
+    Object petCategoryId = freezed,
+    Object name = freezed,
+  }) {
+    return _then(_PetCategory(
+      petCategoryId: petCategoryId == freezed
+          ? _value.petCategoryId
+          : petCategoryId as String,
+      name: name == freezed ? _value.name : name as String,
+    ));
+  }
+}
+
+@JsonSerializable()
+
+/// @nodoc
+class _$_PetCategory implements _PetCategory {
+  const _$_PetCategory({this.petCategoryId, this.name});
+
+  factory _$_PetCategory.fromJson(Map<String, dynamic> json) =>
+      _$_$_PetCategoryFromJson(json);
+
+  @override
+  final String petCategoryId;
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'PetCategory(petCategoryId: $petCategoryId, name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _PetCategory &&
+            (identical(other.petCategoryId, petCategoryId) ||
+                const DeepCollectionEquality()
+                    .equals(other.petCategoryId, petCategoryId)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(petCategoryId) ^
+      const DeepCollectionEquality().hash(name);
+
+  @override
+  _$PetCategoryCopyWith<_PetCategory> get copyWith =>
+      __$PetCategoryCopyWithImpl<_PetCategory>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_PetCategoryToJson(this);
+  }
+}
+
+abstract class _PetCategory implements PetCategory {
+  const factory _PetCategory({String petCategoryId, String name}) =
+      _$_PetCategory;
+
+  factory _PetCategory.fromJson(Map<String, dynamic> json) =
+      _$_PetCategory.fromJson;
+
+  @override
+  String get petCategoryId;
+  @override
+  String get name;
+  @override
+  _$PetCategoryCopyWith<_PetCategory> get copyWith;
+}
+
+PetBreed _$PetBreedFromJson(Map<String, dynamic> json) {
+  return _PetBreed.fromJson(json);
+}
+
+/// @nodoc
+class _$PetBreedTearOff {
+  const _$PetBreedTearOff();
+
+// ignore: unused_element
+  _PetBreed call({String breedId, String petCategoryId, String name}) {
+    return _PetBreed(
+      breedId: breedId,
+      petCategoryId: petCategoryId,
+      name: name,
+    );
+  }
+
+// ignore: unused_element
+  PetBreed fromJson(Map<String, Object> json) {
+    return PetBreed.fromJson(json);
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $PetBreed = _$PetBreedTearOff();
+
+/// @nodoc
+mixin _$PetBreed {
+  String get breedId;
+  String get petCategoryId;
+  String get name;
+
+  Map<String, dynamic> toJson();
+  $PetBreedCopyWith<PetBreed> get copyWith;
+}
+
+/// @nodoc
+abstract class $PetBreedCopyWith<$Res> {
+  factory $PetBreedCopyWith(PetBreed value, $Res Function(PetBreed) then) =
+      _$PetBreedCopyWithImpl<$Res>;
+  $Res call({String breedId, String petCategoryId, String name});
+}
+
+/// @nodoc
+class _$PetBreedCopyWithImpl<$Res> implements $PetBreedCopyWith<$Res> {
+  _$PetBreedCopyWithImpl(this._value, this._then);
+
+  final PetBreed _value;
+  // ignore: unused_field
+  final $Res Function(PetBreed) _then;
+
+  @override
+  $Res call({
+    Object breedId = freezed,
+    Object petCategoryId = freezed,
+    Object name = freezed,
+  }) {
+    return _then(_value.copyWith(
+      breedId: breedId == freezed ? _value.breedId : breedId as String,
+      petCategoryId: petCategoryId == freezed
+          ? _value.petCategoryId
+          : petCategoryId as String,
+      name: name == freezed ? _value.name : name as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$PetBreedCopyWith<$Res> implements $PetBreedCopyWith<$Res> {
+  factory _$PetBreedCopyWith(_PetBreed value, $Res Function(_PetBreed) then) =
+      __$PetBreedCopyWithImpl<$Res>;
+  @override
+  $Res call({String breedId, String petCategoryId, String name});
+}
+
+/// @nodoc
+class __$PetBreedCopyWithImpl<$Res> extends _$PetBreedCopyWithImpl<$Res>
+    implements _$PetBreedCopyWith<$Res> {
+  __$PetBreedCopyWithImpl(_PetBreed _value, $Res Function(_PetBreed) _then)
+      : super(_value, (v) => _then(v as _PetBreed));
+
+  @override
+  _PetBreed get _value => super._value as _PetBreed;
+
+  @override
+  $Res call({
+    Object breedId = freezed,
+    Object petCategoryId = freezed,
+    Object name = freezed,
+  }) {
+    return _then(_PetBreed(
+      breedId: breedId == freezed ? _value.breedId : breedId as String,
+      petCategoryId: petCategoryId == freezed
+          ? _value.petCategoryId
+          : petCategoryId as String,
+      name: name == freezed ? _value.name : name as String,
+    ));
+  }
+}
+
+@JsonSerializable()
+
+/// @nodoc
+class _$_PetBreed implements _PetBreed {
+  const _$_PetBreed({this.breedId, this.petCategoryId, this.name});
+
+  factory _$_PetBreed.fromJson(Map<String, dynamic> json) =>
+      _$_$_PetBreedFromJson(json);
+
+  @override
+  final String breedId;
+  @override
+  final String petCategoryId;
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'PetBreed(breedId: $breedId, petCategoryId: $petCategoryId, name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _PetBreed &&
+            (identical(other.breedId, breedId) ||
+                const DeepCollectionEquality()
+                    .equals(other.breedId, breedId)) &&
+            (identical(other.petCategoryId, petCategoryId) ||
+                const DeepCollectionEquality()
+                    .equals(other.petCategoryId, petCategoryId)) &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(breedId) ^
+      const DeepCollectionEquality().hash(petCategoryId) ^
+      const DeepCollectionEquality().hash(name);
+
+  @override
+  _$PetBreedCopyWith<_PetBreed> get copyWith =>
+      __$PetBreedCopyWithImpl<_PetBreed>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_PetBreedToJson(this);
+  }
+}
+
+abstract class _PetBreed implements PetBreed {
+  const factory _PetBreed({String breedId, String petCategoryId, String name}) =
+      _$_PetBreed;
+
+  factory _PetBreed.fromJson(Map<String, dynamic> json) = _$_PetBreed.fromJson;
+
+  @override
+  String get breedId;
+  @override
+  String get petCategoryId;
+  @override
+  String get name;
+  @override
+  _$PetBreedCopyWith<_PetBreed> get copyWith;
+}
