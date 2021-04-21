@@ -1,4 +1,5 @@
-
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DoctorView extends StatefulWidget {
   DoctorView({Key key}) : super(key: key);
@@ -239,3 +240,53 @@ class _DoctorViewState extends State<DoctorView> {
                 ],
               ),
             ),
+ Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 0,
+                color: Colors.white,
+                child: ListTile(
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset('assets/images/doctor1.jpeg'),
+                  ),
+                  title: Text('Dr. s.wickramage',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      )),
+                  subtitle: Text(
+                    'Dog Specialist',
+                  ),
+                  trailing: Image.asset('assets/images/dots.png',
+                      color: Colors.grey, height: 20),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 0,
+                color: Colors.white,
+                child: ListTile(
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset('assets/images/doctor2.jpeg'),
+                  ),
+                  title: Text('Dr. Nalin jayantha',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      )),
+                  subtitle: Text(
+                    'Dog care Specialist',
+                  ),
+                  trailing: Image.asset('assets/images/dots.png',
+                      color: Colors.grey, height: 20),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
