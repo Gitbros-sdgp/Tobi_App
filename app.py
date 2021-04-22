@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request
 from BreedImage.breedClassification import breedClassification as Breed
 from EmotionFinal.Emotion import verifyEmotion as elmo
 from firebaseStorage import getBreedImg as BI
+from firebaseStorage import getEmotionVid as EV
 import glob
 import os
 
@@ -39,14 +40,9 @@ def emotion():
 
     global vid
 
-    if request.method == 'POST':
-        request_data = request.data
-        request_data = json.loads(request_data)
-        vid = request_data['__emotionVid']
-        return ' '
-
-    elif request.method == 'GET':
-        result = elmo(video=vid)
+    if request.method == 'GET':
+        EV()
+        result = elmo(video='test_vid.mp4')
         return jsonify(result)
 
     else:

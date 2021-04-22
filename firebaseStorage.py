@@ -1,5 +1,4 @@
 import pyrebase
-import os
 
 config = {
     "apiKey": "AIzaSyBArxbVrbnTz5YNnE614UMSUa9Xzyu9JCI",
@@ -15,8 +14,12 @@ config = {
 firebase = pyrebase.initialize_app(config)
 storage = firebase.storage()
 image = 'BreedTemp/test.jpg'
+video = 'EmotionTemp/test.mp4'
 
 
 def getBreedImg():
     storage.child(image).download('test_img.jpg')
+
+def getEmotionVid():
+    storage.child(video).download('test_vid.mp4')
 
