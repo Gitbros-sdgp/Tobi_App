@@ -20,4 +20,4 @@ def getBreedImg():
     storage.child(image).download('test_img.jpg')
 
 def deleteImg():
-    storage.delete(image)
+    storage.child(image).delete('test.ipg')
