@@ -12,3 +12,5 @@ resampy==0.2.2
 soundfile==0.10.3.post1
 dataclasses==0.8
 moviepy==1.0.3
+libgtk2.0-dev
+pkg-config
