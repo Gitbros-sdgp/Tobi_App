@@ -20,10 +20,9 @@ def breed():
     global image
 
     if request.method == 'POST':
-        # request_data = request.data
-        # request_data = json.loads(request_data.decode('utf-8'))
-        request_data = json.loads(request.form.get('__breedImg'))
-        image.append(request_data)
+        request_data = request.data
+        request_data = json.loads(request_data.decode('utf-8'))
+        image.append(request_data['__breedImg'])
         return ' '
 
     elif request.method == 'GET':
