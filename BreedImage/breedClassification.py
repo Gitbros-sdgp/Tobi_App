@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 from BreedImage.readImg import readImg
 import tensorflow as tf
+import glob
+import os
 
 class breedClassification:
 
@@ -25,5 +27,8 @@ class breedClassification:
         data = {
             "BreedName": breed_names
         }
+
+        for filename in glob.glob('Test1/*.jpg'):
+            os.remove(filename)
 
         return data

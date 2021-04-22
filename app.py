@@ -5,7 +5,6 @@ from BreedImage.breedClassification import breedClassification as Breed
 from EmotionFinal.Emotion import verifyEmotion as elmo
 from firebaseStorage import getBreedImg as BI
 
-
 image = []
 vid = []
 
