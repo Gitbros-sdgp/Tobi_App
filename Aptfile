@@ -1,2 +1,4 @@
 libasound2-dev
 libsndfile-dev
+libgtk2.0-dev
+pkg-config
