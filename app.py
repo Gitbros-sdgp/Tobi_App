@@ -4,6 +4,8 @@ from flask import Flask, jsonify, request
 from BreedImage.breedClassification import breedClassification as Breed
 from EmotionFinal.Emotion import verifyEmotion as elmo
 from firebaseStorage import getBreedImg as BI
+import glob
+import os
 
 image = []
 vid = []
@@ -22,6 +24,8 @@ def breed():
     if request.method == 'GET':
         BI()
         result = Breed.verifyBreed(self=Breed, path='test_img.jpg', size=224)
+        for filename in glob.glob('test_img.jpg'):
+            os.remove(filename)
         return jsonify(result)
 
     else:
