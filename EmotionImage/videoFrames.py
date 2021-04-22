@@ -17,6 +17,7 @@ def videoToFrame(video):
 
     cap.release()
     cv2.destroyAllWindows()
+    cv2.waitKey(1)
 
     happyCount = 0
     angryCount = 0
