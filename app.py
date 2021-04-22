@@ -42,7 +42,7 @@ def emotion():
 
     if request.method == 'POST':
         request_data = request.data
-        request_data = json.loads(request_data.decode())
+        request_data = json.loads(request_data)
         vid = request_data['__emotionVid']
         return ' '
 
