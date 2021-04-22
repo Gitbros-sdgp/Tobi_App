@@ -16,8 +16,10 @@ firebase = pyrebase.initialize_app(config)
 storage = firebase.storage()
 image = 'BreedTemp/test.jpg'
 
+
 def getBreedImg():
     storage.child(image).download('test_img.jpg')
 
+
 def deleteImg():
-    storage.child(image).delete('test.ipg')
+    storage.child(image).delete()
