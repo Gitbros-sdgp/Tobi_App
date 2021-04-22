@@ -20,6 +20,3 @@ image = 'BreedTemp/test.jpg'
 def getBreedImg():
     storage.child(image).download('test_img.jpg')
 
-
-def deleteImg():
-    storage.child(image).delete()
