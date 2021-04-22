@@ -19,14 +19,8 @@ def breed():
 
     global image
 
-    if request.method == 'POST':
-        request_data = request.data
-        request_data = json.loads(request_data.decode())
-        image.append(request_data['__breedImg'])
-        return ' '
-
-    elif request.method == 'GET':
-        result = Breed.verifyBreed(self=Breed, path=image[0], size=224)
+    if request.method == 'GET':
+        result = Breed.verifyBreed(self=Breed, path='Test/test.jpg', size=224)
         return jsonify(result)
 
     else:
