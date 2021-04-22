@@ -14,7 +14,7 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 storage = firebase.storage()
-image = 'test.jpg'
+image = 'BreedTemp/test.jpg'
 
 def getBreedImg():
-    storage.child(image).download(filename='BreedTemp/test.jpg')
+    storage.child(image).download('Test1/test.jpg')
