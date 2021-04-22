@@ -21,7 +21,7 @@ def breed():
 
     if request.method == 'POST':
         request_data = request.data
-        request_data = json.loads(request_data.decode('utf-8'))
+        request_data = json.loads(request_data.decode())
         image.append(request_data['__breedImg'])
         return ' '
 
