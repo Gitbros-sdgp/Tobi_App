@@ -43,6 +43,8 @@ def emotion():
     if request.method == 'GET':
         EV()
         result = elmo(video='test_vid.mp4')
+        for filename in glob.glob('test_vid.mp4'):
+            os.remove(filename)
         return jsonify(result)
 
     else:
