@@ -21,7 +21,7 @@ def breed():
 
     if request.method == 'GET':
         BI()
-        result = Breed.verifyBreed(self=Breed, path='Test1/test.jpg', size=224)
+        result = Breed.verifyBreed(self=Breed, path='test_img.jpg', size=224)
         return jsonify(result)
 
     else:

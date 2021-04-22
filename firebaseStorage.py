@@ -17,4 +17,4 @@ storage = firebase.storage()
 image = 'BreedTemp/test.jpg'
 
 def getBreedImg():
-    storage.child(image).download('Test1/test.jpg')
+    storage.child(image).download('test_img.jpg')
