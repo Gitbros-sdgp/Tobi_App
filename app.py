@@ -2,13 +2,11 @@
 import json
 from flask import Flask, jsonify, request
 from BreedImage.breedClassification import breedClassification as Breed
-from EmotionAudio.inference import audio_classify as audio
-from EmotionImage.emotionClassification import emotionClassification as emo
 from EmotionFinal.Emotion import verifyEmotion as elmo
-from EmotionImage.audioClip import videoToAudio as hehe
 
-image = None
-vid = None
+
+image = []
+vid = []
 
 # Flask App
 app = Flask(__name__)
@@ -22,13 +20,14 @@ def breed():
     global image
 
     if request.method == 'POST':
-        request_data = request.data
-        request_data = json.loads(request_data.decode('utf-8'))
-        image = request_data['__breedImg']
+        # request_data = request.data
+        # request_data = json.loads(request_data.decode('utf-8'))
+        request_data = json.loads(request.form.get('__breedImg'))
+        image.append(request_data)
         return ' '
 
     elif request.method == 'GET':
-        result = Breed.verifyBreed(self=Breed, path=image, size=224)
+        result = Breed.verifyBreed(self=Breed, path=image[0], size=224)
         return jsonify(result)
 
     else:
