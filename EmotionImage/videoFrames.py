@@ -5,19 +5,13 @@ import os
 from EmotionImage.emotionClassification import emotionClassification as emo
 
 def videoToFrame(video):
-    cap = cv2.VideoCapture(video)
-    i = 0
-    images = []
-    while (cap.isOpened()):
-        ret, frame = cap.read()
-        if ret == False:
-            break
-        images.append(cv2.imwrite('Test/temp' + str(i) + '.jpg', frame))
-        i += 1
-
-    cap.release()
-    cv2.destroyAllWindows()
-    # cv2.waitKey(1)
+    vidcap = cv2.VideoCapture(video)
+    success, image = vidcap.read()
+    count = 0
+    while success:
+        cv2.imwrite("Test/frame%d.jpg" % count, image)  # save frame as JPEG file
+        success, image = vidcap.read()
+        count += 1
 
     happyCount = 0
     angryCount = 0
