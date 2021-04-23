@@ -107,8 +107,7 @@ class _DoctorViewState extends State<DoctorView> {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0, right: 32, top: 32),
+           
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
