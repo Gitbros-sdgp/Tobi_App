@@ -1,148 +1,184 @@
-import 'dart:ui';
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'emotion_PageTwo.dart';
 
-class EmotionPageOne extends StatelessWidget {
+class EmotionPageOne extends StatefulWidget {
+  @override
+  MyEmotionPageOne createState() => MyEmotionPageOne();
+}
+
+class MyEmotionPageOne extends State<EmotionPageOne> {
+  File _video;
+  final picker = ImagePicker();
+
+  void _getVideo() async {
+    // ignore: deprecated_member_use
+    var videos = await picker.getVideo(source: ImageSource.gallery);
+    _video = File(videos.path);
+  }
+
+  void _getVideoC() async {
+    // ignore: deprecated_member_use
+    var videos = await picker.getVideo(source: ImageSource.camera);
+
+    _video = File(videos.path);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Container(
-            height: MediaQuery.of(context).size.height / 0.5,
-            width: MediaQuery.of(context).size.width / 0.5,
-            child: Stack(
-              children: <Widget>[
-                //  Row(
-                //crossAxisAlignment: CrossAxisAlignment.start,
-                //children: [
-
-                Container(
-                  //child container for dog icon
-                  child: Container(
-                    //dog Icon
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Image.asset(
-                        'assets/EmotionPage/dog.jpg',
-                        height: 115,
-                        width: 115,
-                      ),
-                    ),
-                    height: 150,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Color(0xffF5F5FA),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Color(0xFFAAAACC),
-                          blurRadius: 8,
-                          offset: Offset(6, 4),
+    return Scaffold(
+      body: Center(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          color: Color(0xFFF5F5FA),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  new Container(
+                    decoration: BoxDecoration(color: Color(0xFFFFD500)),
+                    height: 256.0,
+                    width: 410.0,
+                    child: new Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        ClipRRect(
+                          borderRadius: new BorderRadius.circular(100.0),
+                          child: new Image.asset(
+                            "assets/EmotionPage/dog.jpg",
+                            height: 121.0,
+                            width: 121.0,
+                            fit: BoxFit.scaleDown,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 180.0),
+                          child: Text(
+                            "Emotion Detection",
+                            style: TextStyle(fontSize: 30.0),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ],
                     ),
-                    margin: EdgeInsets.only(
-                        left: 20.0, top: 37.0, bottom: 90.0, right: 20),
-                    padding: EdgeInsets.only(bottom: 0, right: 0),
                   ),
-                  //end dog icon container
-
-                  height: 300.0,
-                  width: 392.0,
-                  color: Color(0xffFFD500),
-                  alignment: Alignment.bottomCenter,
-
-                  margin: EdgeInsets.only(left: 0.0, top: 0.0),
-                  padding: EdgeInsets.only(bottom: 0),
-                ),
-                Container(
-                  child: Text(
-                    "Emotion Detection",
-                    style: GoogleFonts.lato(
-                        fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                  margin: EdgeInsets.only(
-                      left: 70.0, top: 250.0, bottom: 0.0, right: 20),
-                  padding: EdgeInsets.only(bottom: 0, right: 0),
-                ),
-                //   ],
-                //),
-                //  Row(
-                //  children: [
-                /* Container(
-                      width: 200,
-                      height: 100,
+                ],
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 20.0,
+                    ),
+                    child: Container(
+                      width: 350.0,
+                      margin: const EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(40),
                       decoration: BoxDecoration(
-                          shape: BoxShape.rectangle, color: Colors.white),
-                      margin: EdgeInsets.only(
-                          left: 0.0, top: 400.0, bottom: 70.0, right: 0.0),
-                      padding: EdgeInsets.only(
-                          left: 0, top: 0, bottom: 0, right: 0),
-                    ), */
-                Container(
-                  width: 350,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Color(0xffF0F0F0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xFFAAAACC),
-                        blurRadius: 8,
-                        offset: Offset(6, 4),
+                        color: Color(0xFFF5F5FA),
+                        borderRadius: BorderRadius.circular(30.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(6, 8), // changes position of shadow
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  margin: EdgeInsets.only(
-                      left: 20.0, top: 340.0, bottom: 0.0, right: 20),
-                  padding: EdgeInsets.only(bottom: 310, right: 352),
-                ),
-                //   ],
-                //   ),
-                //    Row(
-                //  children: [
-                Container(
-                  margin: EdgeInsets.only(left: 160, top: 650.0, bottom: 0.0),
-
-                  padding: EdgeInsets.all(0.0),
-                  // color: Colors.white,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Image.asset('assets/EmotionPage/notRecord.jpeg'),
-                    iconSize: 50,
-                  ),
-                  //color: Colors.white,
-                )
-                //   ],
-                //   ),
-                //  Row(
-                // children: [
-                ,
-                Container(
-                  width: 130.0,
-                  height: 70.0,
-                  //color: Colors.yellow,
-
-                  child: RaisedButton(
-                      onPressed: () {},
+                      height: 175.0,
                       child: Text(
-                        "Upload",
-                        style: GoogleFonts.lato(fontSize: 20),
+                        'Select a video from your phone or open your camera and record a video. Then upload the video.',
+                        style: TextStyle(fontSize: 18.0),
+                        textAlign: TextAlign.justify,
                       ),
-                      color: Color(0xffFFD500),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0))),
-
-                  margin: EdgeInsets.only(left: 130, top: 700.0, bottom: 0.0),
-                  padding:
-                      EdgeInsets.only(bottom: 10, left: 10, right: 10, top: 10),
-                )
-                //   ],
-                //   )
-              ],
-            ),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 50.0,
+                ),
+                child: new Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Container(
+                      margin: const EdgeInsets.fromLTRB(48, 0, 12, 0),
+                      width: 127.0,
+                      height: 47.0,
+                      child: MaterialButton(
+                        child: Text(
+                          'Select from device',
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                        color: Color(0xFFFFD500),
+                        onPressed: () {
+                          _getVideo();
+                        },
+                      ),
+                    ),
+                    new Text("or"),
+                    new Container(
+                      margin: const EdgeInsets.fromLTRB(12, 0, 42, 0),
+                      width: 140.0,
+                      height: 47.0,
+                      child: MaterialButton(
+                        child: Text(
+                          'Open Camera',
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                        color: Color(0xFFFFD500),
+                        onPressed: () {
+                          _getVideoC();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 50.0,
+                    ),
+                    child: new Container(
+                      margin: const EdgeInsets.fromLTRB(48, 0, 12, 0),
+                      width: 127.0,
+                      height: 47.0,
+                      child: MaterialButton(
+                        child: Text(
+                          'Upload',
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        color: Color(0xFFFFD500),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      EmotionPageTwo(video: _video)));
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

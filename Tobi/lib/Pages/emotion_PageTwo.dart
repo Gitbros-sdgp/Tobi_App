@@ -1,27 +1,29 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'Breed_PageOne.dart';
-import 'Breed_PageFinal.dart';
+import 'emotion_PageOne.dart';
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'emotion_PageFinal.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class BreedPageTwo extends StatefulWidget {
-  File image;
+class EmotionPageTwo extends StatefulWidget {
+  File video;
 
-  BreedPageTwo({Key key, this.image}) : super(key: key);
+  EmotionPageTwo({Key key, this.video}) : super(key: key);
 
   @override
-  MyBreedPageTwo createState() => MyBreedPageTwo(image);
+  MyEmotionPageTwo createState() => MyEmotionPageTwo(video);
 }
 
-Uri uri = Uri.parse('https://testing-l.herokuapp.com/breed');
+Uri uri = Uri.parse('https://testing-l.herokuapp.com/emotion');
 
-class MyBreedPageTwo extends State<BreedPageTwo> {
-  File image;
-  String breedName;
-  MyBreedPageTwo(this.image);
+class MyEmotionPageTwo extends State<EmotionPageTwo> {
+  File video;
+  String emotionName;
+  String soundName;
+  double soundP;
+  MyEmotionPageTwo(this.video);
   Dio dio = new Dio();
 
   @override
@@ -42,7 +44,7 @@ class MyBreedPageTwo extends State<BreedPageTwo> {
                         ClipRRect(
                           borderRadius: new BorderRadius.circular(100.0),
                           child: new Image.asset(
-                            "assets/BreedPageTwo/dog2.png",
+                            "assets/EmotionPage/dog.jpg",
                             height: 121.0,
                             width: 121.0,
                             fit: BoxFit.scaleDown,
@@ -51,7 +53,7 @@ class MyBreedPageTwo extends State<BreedPageTwo> {
                         Padding(
                           padding: const EdgeInsets.only(top: 180.0),
                           child: Text(
-                            "Breed Detection",
+                            "Emotion Detection",
                             style: TextStyle(fontSize: 30.0),
                             textAlign: TextAlign.center,
                           ),
@@ -81,7 +83,7 @@ class MyBreedPageTwo extends State<BreedPageTwo> {
               ),
               height: 175.0,
               child: Text(
-                'Upload an image of an dog using the "Upload" button below. Then, after a moment you will get the result.',
+                'Upload an video of an dog using the "Upload" button below. Then, after a moment you will get the result.',
                 style: TextStyle(fontSize: 18.0),
                 textAlign: TextAlign.justify,
               ),
@@ -108,7 +110,10 @@ class MyBreedPageTwo extends State<BreedPageTwo> {
               width: MediaQuery.of(context).size.width / 1.2,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30.0),
-                child: Image.file(image),
+                child: Image.asset(
+                  'assets/EmotionPage/dog.jpg',
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             new Row(children: <Widget>[
@@ -128,27 +133,32 @@ class MyBreedPageTwo extends State<BreedPageTwo> {
                     // String filename = image.path.split('/').last;
                     Reference firebaseStorage = FirebaseStorage.instance
                         .ref()
-                        .child('BreedTemp/test.jpg');
-                    await firebaseStorage.putFile(image);
+                        .child('EmotionTemp/test.mp4');
+                    await firebaseStorage.putFile(video);
 
-                    final response =
-                        await http.get('https://testing-l.herokuapp.com/breed');
+                    final response = await http
+                        .get('https://testing-l.herokuapp.com/emotion');
 
                     final decoded =
                         jsonDecode(response.body) as Map<String, dynamic>;
 
                     Reference ref = FirebaseStorage.instance.refFromURL(
-                        'gs://test-3f1bf.appspot.com/BreedTemp/test.jpg');
+                        'gs://test-3f1bf.appspot.com/EmotionTemp/test.mp4');
                     await ref.delete();
 
                     setState(() {
-                      breedName = decoded['BreedName'];
+                      emotionName = decoded['emotionName'];
+                      soundName = decoded['soundName'];
+                      soundP = decoded['soundPercentage'];
 
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => BreedPageFinal(
-                                  image: image, name: breedName)));
+                              builder: (context) => EmotionPageFinal(
+                                  video: video,
+                                  name: emotionName,
+                                  soundN: soundName,
+                                  soundP: soundP)));
                     });
                   },
                 ),
@@ -170,7 +180,7 @@ class MyBreedPageTwo extends State<BreedPageTwo> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => BreedPageOne()));
+                            builder: (context) => EmotionPageOne()));
                   },
                 ),
               )
