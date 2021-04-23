@@ -1,19 +1,49 @@
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'Breed_PageOne.dart';
+import 'Breed_PageFinal.dart';
+import 'dart:convert';
+import 'package:dio/dio.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-class BreedPageTwo extends StatelessWidget {
+class BreedPageTwo extends StatefulWidget {
+  File image;
+
+  BreedPageTwo({Key key, this.image}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Confirm Page',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Roboto'),
-      home: MyBreedPageTwo(),
-    );
-  }
+  MyBreedPageTwo createState() => MyBreedPageTwo(image);
 }
 
-class MyBreedPageTwo extends StatelessWidget {
+Uri uri = Uri.parse('https://testing-l.herokuapp.com/breed');
+
+// Future<http.Response> _getBreed(File image) {
+//   // final String apiUrl = 'https://testing-l.herokuapp.com/breed';
+
+//   // return http.post(
+//   //   Uri.https('testing-l.herokuapp.com', 'breed'),
+//   //   headers: <String, String>{
+//   //     'Content-Type': 'application/json; charset=UTF-8',
+//   //   },
+//   //   body: jsonEncode(
+//   //     <String, File>{'_breedImg': image},
+//   //   ),
+//   // );
+
+//   final mimeTypeDate = lookupMimeType(image.path, headerBytes: [0xFF, 0xD8]).split('/');
+
+//   final imageRequest = http.MultipartFile('POST', uri);
+
+//   final imageUpload = http.MultipartFile.fromPath('_breedImg', image.path, contentType: MediaType(mimeTypeDate[0], mimeTypeDate[1]));
+// }
+
+class MyBreedPageTwo extends State<BreedPageTwo> {
+  File image;
+  String breedName;
+  MyBreedPageTwo(this.image);
+  Dio dio = new Dio();
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -95,6 +125,11 @@ class MyBreedPageTwo extends StatelessWidget {
                 ],
               ),
               height: 197.0,
+              width: MediaQuery.of(context).size.width / 1.2,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30.0),
+                child: Image.file(image),
+              ),
             ),
             new Row(children: <Widget>[
               Container(
@@ -109,7 +144,33 @@ class MyBreedPageTwo extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0)),
                   color: Color(0xFFFFD500),
-                  onPressed: () {},
+                  onPressed: () async {
+                    // String filename = image.path.split('/').last;
+                    Reference firebaseStorage = FirebaseStorage.instance
+                        .ref()
+                        .child('BreedTemp/test.jpg');
+                    await firebaseStorage.putFile(image);
+
+                    final response =
+                        await http.get('https://testing-l.herokuapp.com/breed');
+
+                    final decoded =
+                        jsonDecode(response.body) as Map<String, dynamic>;
+
+                    Reference ref = FirebaseStorage.instance.refFromURL(
+                        'gs://test-3f1bf.appspot.com/BreedTemp/test.jpg');
+                    await ref.delete();
+
+                    setState(() {
+                      breedName = decoded['BreedName'];
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BreedPageFinal(
+                                  image: image, name: breedName)));
+                    });
+                  },
                 ),
               ),
               Text("Or"),

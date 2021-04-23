@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'Breed_PageOne.dart';
+import 'noticeboard.dart';
+import 'iotMap.dart';
+import 'qrScanner.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'emotion_PageOne.dart';
 
 class MyHomePage extends StatefulWidget {
   User user;
@@ -28,8 +32,30 @@ Future<Widget> _getImage(BuildContext context, String imageName) async {
 class _homePageState extends State<MyHomePage> {
   User user;
   String name = "User";
+  User currentUser = FirebaseAuth.instance.currentUser;
 
   _homePageState(this.user);
+
+  void checkDeviceId(String uid) {
+    FirebaseFirestore.instance
+        .collection('gps_devices')
+        .doc(uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        String tempdid = documentSnapshot.data()['deviceId'];
+        // print(tempdid);
+        if (tempdid != "" && tempdid.length == 6) {
+          // did = tempdid;
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => IotMap(tempdid)));
+        }
+      } else {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => QRScanner(uid)));
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -217,55 +243,63 @@ class _homePageState extends State<MyHomePage> {
                         right: 21.0,
                         bottom: 21.0,
                       ),
-                      child: new Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          new Container(
-                            alignment: Alignment.center,
-                            height: 160.0,
-                            width: 152.0,
-                            decoration: new BoxDecoration(
-                              color: Color(0xFFF5F5FA),
-                              borderRadius: BorderRadius.circular(20.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color(0xFFAAAACC),
-                                  blurRadius: 10,
-                                  offset: Offset(6, 4),
+                      child: InkWell(
+                        child: new Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            new Container(
+                              alignment: Alignment.center,
+                              height: 160.0,
+                              width: 152.0,
+                              decoration: new BoxDecoration(
+                                color: Color(0xFFF5F5FA),
+                                borderRadius: BorderRadius.circular(20.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xFFAAAACC),
+                                    blurRadius: 10,
+                                    offset: Offset(6, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 8.0,
+                                  bottom: 30.0,
                                 ),
-                              ],
+                                child: new Image.asset(
+                                  'assets/homePage/emotionIcon.jpg',
+                                  height: 95.0,
+                                  width: 98.0,
+                                ),
+                              ),
                             ),
-                            child: Padding(
+                            Padding(
                               padding: const EdgeInsets.only(
                                 left: 8.0,
-                                bottom: 30.0,
+                                top: 100.0,
                               ),
-                              child: new Image.asset(
-                                'assets/homePage/emotionIcon.jpg',
-                                height: 95.0,
-                                width: 98.0,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 8.0,
-                              top: 100.0,
-                            ),
-                            child: new Container(
-                              alignment: Alignment.center,
-                              height: 24.0,
-                              width: 90.0,
-                              child: new Text(
-                                'Emotion',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontFamily: 'Actor',
+                              child: new Container(
+                                alignment: Alignment.center,
+                                height: 24.0,
+                                width: 90.0,
+                                child: new Text(
+                                  'Emotion',
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontFamily: 'Actor',
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
+                        onTap: () async {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EmotionPageOne()));
+                        },
                       ),
                     ),
                   ),
@@ -282,55 +316,60 @@ class _homePageState extends State<MyHomePage> {
                         top: 13.0,
                         bottom: 210.0,
                       ),
-                      child: new Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          new Container(
-                            alignment: Alignment.center,
-                            height: 160.0,
-                            width: 152.0,
-                            decoration: new BoxDecoration(
-                              color: Color(0xFFF5F5FA),
-                              borderRadius: BorderRadius.circular(20.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color(0xFFAAAACC),
-                                  blurRadius: 10,
-                                  offset: Offset(6, 4),
+                      child: InkWell(
+                        onTap: () {
+                          checkDeviceId(widget.user.uid);
+                        },
+                        child: new Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            new Container(
+                              alignment: Alignment.center,
+                              height: 160.0,
+                              width: 152.0,
+                              decoration: new BoxDecoration(
+                                color: Color(0xFFF5F5FA),
+                                borderRadius: BorderRadius.circular(20.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xFFAAAACC),
+                                    blurRadius: 10,
+                                    offset: Offset(6, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 8.0,
+                                  bottom: 30.0,
                                 ),
-                              ],
+                                child: new Image.asset(
+                                  'assets/homePage/mapIcon.png',
+                                  height: 62.1,
+                                  width: 85.0,
+                                ),
+                              ),
                             ),
-                            child: Padding(
+                            Padding(
                               padding: const EdgeInsets.only(
                                 left: 8.0,
-                                bottom: 30.0,
+                                top: 100.0,
                               ),
-                              child: new Image.asset(
-                                'assets/homePage/noticeIcon.png',
-                                height: 62.1,
-                                width: 85.0,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 8.0,
-                              top: 100.0,
-                            ),
-                            child: new Container(
-                              alignment: Alignment.center,
-                              height: 24.0,
-                              width: 130.0,
-                              child: new Text(
-                                'Noticeboard',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontFamily: 'Actor',
+                              child: new Container(
+                                alignment: Alignment.center,
+                                height: 24.0,
+                                width: 130.0,
+                                child: new Text(
+                                  'GPS Collar',
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontFamily: 'Actor',
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -341,55 +380,63 @@ class _homePageState extends State<MyHomePage> {
                         top: 13.0,
                         bottom: 210.0,
                       ),
-                      child: new Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          new Container(
-                            alignment: Alignment.center,
-                            height: 160.0,
-                            width: 152.0,
-                            decoration: new BoxDecoration(
-                              color: Color(0xFFF5F5FA),
-                              borderRadius: BorderRadius.circular(20.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Color(0xFFAAAACC),
-                                  blurRadius: 10,
-                                  offset: Offset(6, 4),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => NoticeBoard()));
+                        },
+                        child: new Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            new Container(
+                              alignment: Alignment.center,
+                              height: 160.0,
+                              width: 152.0,
+                              decoration: new BoxDecoration(
+                                color: Color(0xFFF5F5FA),
+                                borderRadius: BorderRadius.circular(20.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Color(0xFFAAAACC),
+                                    blurRadius: 10,
+                                    offset: Offset(6, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 8.0,
+                                  bottom: 30.0,
                                 ),
-                              ],
+                                child: new Image.asset(
+                                  'assets/homePage/noticeIcon.png',
+                                  height: 59.02,
+                                  width: 127.15,
+                                ),
+                              ),
                             ),
-                            child: Padding(
+                            Padding(
                               padding: const EdgeInsets.only(
                                 left: 8.0,
-                                bottom: 30.0,
+                                top: 100.0,
                               ),
-                              child: new Image.asset(
-                                'assets/homePage/socialIcon.jpg',
-                                height: 59.02,
-                                width: 127.15,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                              left: 8.0,
-                              top: 100.0,
-                            ),
-                            child: new Container(
-                              alignment: Alignment.center,
-                              height: 24.0,
-                              width: 150.0,
-                              child: new Text(
-                                'Social Media',
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontFamily: 'Actor',
+                              child: new Container(
+                                alignment: Alignment.center,
+                                height: 24.0,
+                                width: 150.0,
+                                child: new Text(
+                                  'Noticeboard',
+                                  style: TextStyle(
+                                    fontSize: 20.0,
+                                    fontFamily: 'Actor',
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

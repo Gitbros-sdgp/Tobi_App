@@ -31,6 +31,12 @@ dependencies:
   firebase_core: ^0.7.0
   cloud_firestore: ^0.16.0+1
   firebase_storage: ^7.0.0
+  firebase_database: ^6.0.0
+  location: ^3.0.0
+  flutter_barcode_scanner: ^1.0.1
+  google_maps_flutter: ^1.2.0
+  image_picker: ^0.6.7+22
+  dio: ^3.0.10
 
 dev_dependencies:
   flutter_test:
@@ -55,8 +61,17 @@ flutter:
     - assets/homePage/emotionIcon.jpg
     - assets/homePage/breedIcon.jpg
     - assets/homePage/socialIcon.jpg
+    - assets/homePage/mapIcon.png
     - assets/SignUpPage/googleIcon.png
     - assets/BreedPageTwo/dog2.png
+    - assets/Map/dog_marker.png
+    - assets/Map/user_marker.png
+    - assets/EmotionPage/dog.jpg
+    - assets/EmotionPage/notRecord.jpeg
+    - assets/Noticeboard/cross.png
+    - assets/Noticeboard/dog.png
+    - assets/Noticeboard/hand.png
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

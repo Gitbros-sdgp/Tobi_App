@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'Breed_PageTwo.dart';
 
 class BreedPageOne extends StatefulWidget {
@@ -7,6 +9,26 @@ class BreedPageOne extends StatefulWidget {
 }
 
 class MyBreedPageOne extends State<BreedPageOne> {
+  File _image;
+
+  void _getImageG() async {
+    // ignore: deprecated_member_use
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  void _getImageC() async {
+    // ignore: deprecated_member_use
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,7 +124,9 @@ class MyBreedPageOne extends State<BreedPageOne> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0)),
                         color: Color(0xFFFFD500),
-                        onPressed: () {},
+                        onPressed: () {
+                          _getImageG();
+                        },
                       ),
                     ),
                     new Text("or"),
@@ -118,7 +142,9 @@ class MyBreedPageOne extends State<BreedPageOne> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30.0)),
                         color: Color(0xFFFFD500),
-                        onPressed: () {},
+                        onPressed: () {
+                          _getImageC();
+                        },
                       ),
                     ),
                   ],
@@ -148,7 +174,8 @@ class MyBreedPageOne extends State<BreedPageOne> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => BreedPageTwo()));
+                                  builder: (context) =>
+                                      BreedPageTwo(image: _image)));
                         },
                       ),
                     ),

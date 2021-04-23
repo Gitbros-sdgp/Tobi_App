@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'Pages/Welcome.dart';
-import 'Pages/Breed_PageFinal.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: BreedPageFinal(),
+      home: WelcomePage(),
     );
   }
 }
