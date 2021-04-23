@@ -128,6 +128,7 @@ class _DoctorViewState extends State<DoctorView> {
                 ],
               ),
             ),
+/////////////
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
